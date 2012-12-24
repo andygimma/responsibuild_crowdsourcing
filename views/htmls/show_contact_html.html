@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block sidebarcontent %} 
+{% for result in contact_results %}
+<p><a href="/?organization={{ result.first_name }}">{{ result.first_name }}</a></p>
+{% endfor %}
+{% endblock %}
+
+{% block bodycontent %}
+{% for result in single_contact_results %}
+<p><a href="/?organization={{ result.first_name }}">{{ result.first_name }}</a></p>
+<p>{{ result.email }}</p>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block sidebarcontent %} 
+<h2>Tag = {{ tag }}</h2>
+{% for result in tag_results %}
+<p><a href="/?post={{ result.post_id }}">{{ result.title }}</a></p>
+{% endfor %}
+{% endblock %}

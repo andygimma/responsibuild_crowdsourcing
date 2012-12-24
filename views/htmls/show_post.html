@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block bodycontent %} 
+{% for result in post_results %}
+<h2>{{ result.title }}</h2>
+<p><pre>{{ result.entry }}</pre></p>
+{% if logged_in %}
+<p><a href="/?comment={{result.post_id}}"><strong>Leave a comment</strong></a></p>
+</p>Please feel encouraged to leave comments on the site. The more information we gather, the better information we can give to people!</p>
+{% endif %}
+{% endfor %}
+
+<h3>Comments</h3>
+{% for result in comment_results %}
+<p>by: {{ result.email|email_to_name }}</p>
+<p>{{ result.timestamp|prettify }}</p>
+<p><pre>{{ result.comment}}</pre></p>
+{% endfor %}
+{% endblock %}
+
+{% block sidebarcontent %}
+{% for result in post_results %}
+<p>Author: {{ result.email|email_to_name }}</p>
+<p>Date: {{ result.timestamp|prettify }}</p>
+{% endfor %}
+<p>Tags: {% for result in post_results %}{% for tag in result.tags_list %}<a href="/?singletag={{tag}}">{{tag}}</a> {% endfor %}{%endfor%}
+{% endblock %}

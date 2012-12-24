@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block sidebarcontent %}  
+<h3>Name</h3>
+<p>Responsibuild</p>
+<h3>Created</h3>
+<p>December, 2012</p>
+<h3>Mission</h3>
+<p>Create a single site where members of the public and experts can go to get accurate, timely information on sustainable rebuilding practices.</p>
+<h3>Purpose of this site</h3>
+<p>To crowdsource best practices and to create a community that can be a landing page for sustainability.</p>
+{% endblock %}
+
+{% block bodycontent %}
+
+<h3>Email</h3>
+<p>responsibuildorg@gmail.com</p>
+
+<h3>Technical questions?</h3>
+<p>Contact Andy at andy.n.gimma@gmail.com, or <a href="https://twitter.com/3Rorg" >@andygimma</a> on Twitter</p>
+<p>
+{% endblock %}

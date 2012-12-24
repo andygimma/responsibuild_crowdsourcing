@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block bodycontent %} 
+
+<h3>{{ error_message }}</h3>
+<form action="/member_info" class="form"  method="post">
+<fieldset>
+
+
+<div align="center"><br>
+<input type="checkbox" name="construction" value="construction">Construction<br>
+<input type="checkbox" name="mold_remediation" value="mold_remediation">Mold Remediation<br>
+<input type="checkbox" name="chainsaw" value="chainsaw">Chainsaw<br>
+<input type="checkbox" name="leadership" value="leadership">Leadership<br>
+
+<br>
+</div>
+
+
+
+<div align="center">
+<button class="submit">Finished</button>
+</div>
+<br/>
+
+</fieldset>
+
+{% endblock %}

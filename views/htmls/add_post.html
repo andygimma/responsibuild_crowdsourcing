@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block bodycontent %} 
+
+<h3>{{ error_message }}</h3>
+<form action="/add_post" class="form"  method="post">
+<fieldset>
+<div>
+<label for="title" class="label">Title</label>
+<input type="text" class="input" name="title" size=80 />
+</div>
+<br/>
+
+<div>
+<label for="tags" class="label">Categories</label>
+<input type="text" class="input" name="tags" size=80 />
+</div>
+<br/>
+<div>
+<label for="entry" class="label">Entry</label>
+<textarea name="entry" class="input2" rows="20" >{{ result.entry }}</textarea>
+
+</div>
+<br/>
+<div align="center">
+<button class="submit">Finished</button>
+</div>
+<br/>
+</fieldset>
+
+{% endblock %}
+
+{% block sidebarcontent %}
+<h3>Title</h3>
+<p>Make your title concise. When another user is looking through a list of links, for proper information, all they will see is the title.</p>
+<h3>Categories</h3>
+<p>It's important to come up with good tags, because this is the other most common way a user will search through the posts on this site. What broader categories will this post fall under? Is it about construction? Is it about mold removal? Is it about outdoor space? Use as many as you feel is necessary and <bold>separate multiple tags with commas</bold></p>
+<h3>Entry</h3>
+<p>Entry is the most straight forward. Just add any information you think would be useful.</p>
+
+{% endblock %}

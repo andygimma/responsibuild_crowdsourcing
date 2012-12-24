@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width; initial-scale=1" />
+<!-- <link rel="stylesheet" href="/stylesheets/leaflet.css" /> -->
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
+
+<title>Responsibuild</title>
+
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+<!--Google Analytics-->
+                <script type="text/javascript">
+
+                        var _gaq = _gaq || [];
+                        _gaq.push(['_setAccount', 'UA-29231762-1']);
+                        _gaq.push(['_setDomainName', 'dzyngiri.com']);
+                        _gaq.push(['_trackPageview']);
+
+                (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                        })();
+                </script>
+</head>
+<body>
+<!-- BuySellAds Ad Code -->
+<script type="text/javascript">
+(function(){
+  var bsa = document.createElement('script');
+     bsa.type = 'text/javascript';
+     bsa.async = true;
+     bsa.src = 'http://s3.buysellads.com/ac/bsa.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+})();
+</script>
+<!-- End BuySellAds Ad Code -->
+<div class="resize"></div>
+<!-- Div Wrapper Element Starts Here -->
+<div id="Wrapper">
+<!-- Header Element Starts Here -->
+<header id="header">
+        <!-- Hgroup Element Starts Here -->
+  <hgroup id="title">
+        <div id="logo"></div>
+    <!--<h1>Creating HTML5 <span>Responsive Web Template Using Media Queries</span></h1>-->
+<!--     <h2>A<small> Responsive</small> web template!</h2> -->
+    <h2>Respond, Rebuild, Responsibly</h2>
+  </hgroup>
+  <!-- Hgroup Element Ends Here -->
+  
+  <!-- Nav Element Starts Here -->
+  <nav class="navigation">
+    <a href="/">Home</a>
+    <a href="/?showtags=True" target="_blank">Categories</a>
+    <a href="/?show_organizations=True">Organizations</a>
+    <a href="/?show_contacts=True">Members</a>
+    <a href="/?show_maps=True">Maps</a>
+    <a href="https://twitter.com/3Rorg" target="_blank">JOIN US on TWITTER</a>
+<!--       <a href="#" target="_blank">JOIN US on FACEBOOK</a> -->
+    <a href="/?contact_us=True">Contact Us</a>
+    <a href="/?about_us=True">About Us</a>
+
+      {% if logged_in %}
+       <a href="/?home_page=True">Member Page</a>
+
+       <a href="/?add_post=True">Add Post</a>
+
+        <a href="?logout=true">Log Out</a></p>
+        {% else %}
+        <a href="?member_login=true">Log In</a></p>
+         {% endif %}
+
+      </nav>
+  
+</header>
+<!-- Header Element Ends Here -->
+<!-- Div wrapper2 starts here -->
+<div id="Wrapper2">
+<!-- Sidebar Element Starts Here -->
+<aside id="sidebar-wrapper">
+  <nav class="sidebar">
+
+<!--    <h1>We are Social !</h1> -->
+<!--  <nav class="sidebar">
+   <h1>News Updates</h1>
+   <ul>
+    <li><a href="#?p=774" target="_blank">How to make website Readable [Tips]</a></li>
+    <li><a href="#?p=760" target="_blank">Gliding Divs Using jParallax Plugin [Tutorial]</a></li>
+    <li><a href="#?p=752" target="_blank">Comparing HTML5 Mobile Web Framework</a></li>
+    <li><a href="#?p=701" target="_blank">Free Logo PSD Templates [Freebies]</a></li>
+    <li><a href="#?p=682" target="_blank">Stunning Modal Web PopUp [Freebies]</a></li>
+   </ul>
+  </nav>-->
+   <h1>{{ title_kind }}</h1>
+     {% block sidebarcontent %}
+  {% endblock %}
+  </nav>
+
+ 
+ <!-- Sidebar Element Ends Here -->
+ 
+ <!-- Another Sidebar Element Starts Here -->
+ <section class="sidebar">
+<!--   <h1>Advertisement</h1> -->
+  <!-- BuySellAds Zone Code -->
+<!--  <div style="margin-top:15px; margin-left:30px;">
+<div id="bsap_1274839" class="bsarocks bsap_7e34fb77f06a911111decc6ffaf24d16"></div>
+</div>-->
+<!-- End BuySellAds Zone Code -->
+  
+  </section>
+ </aside>
+ <!-- Another Sidebar Element Ends Here -->
+<!-- Article Element Starts Here -->
+{% block bodycontent %}
+{% endblock%}
+
+<!-- Article's Header Element Starts Here -->
+<!--  <header>
+    <h1><a href="#?p=774" title="How to make your website Readable [Tips]">How to make your website Readable [Tips]</a></h1>
+  </header>-->
+<!-- Article's Header Element Ends Here -->  
+<!--   <img src="/images/featured_Image.jpg" alt="Featured Image 01" /> -->
+<!--   <p>An important aspect of font selection while designing a website, for one reason or another, I didn’t take in consideration is the readability of the “fonts”: “now” that you have the possibility to choose the font you want for your website, you have to be careful not to base the choice only on the aesthetic ( excited for the new CSS3), since the ability to set a certain font doesn’t necessarily mean that it’s the right choice, simply because some fonts are  more readable than others [...]<br/><br/>[<a href="#?p=774" target="_blank">Read more</a>]</p> -->
+ <!-- Article's Header Element Starts Here -->
+<!--  <header>
+    <h1><a href="#?p=760" title="Gliding Divs Using jParallax Plugin [Tutorial]">Gliding Divs Using jParallax Plugin [Tutorial]</a></h1>
+  </header>-->
+<!-- Article's Header Element Ends Here -->  
+<!--   <img src="images/glding_divs.jpg"  alt="Featured Image 02"/> -->
+<!--   <p>jParallax turns a selected element into a ‘window’, or viewport, and all its children into absolutely positioned layers that can be seen through the viewport. These layers move in response to the mouse, and, depending on their dimensions (and options for layer initialisation), they move by different amounts, in a parallaxy kind of way [...]<br/><br/>[<a href="#?p=760" target="_blank">Read more</a>]</p>  -->
+</article>
+<!-- Article Element Ends Here -->
+
+</div>
+<!-- Div wrapper2 ends here -->
+
+<!-- Footer Element Starts Here -->
+<footer id="copyrights">
+
+ <p><small>© 2012 <a href="#" target="_blank">Dzyngiri</a></small></p>
+  <p><a href="#?page_id=23" target="_blank">About Us</a> - <a href="#?page_id=29" target="_blank">Advertise</a> - <a href="#?page_id=5" target="_blank">Contact Us</a></p>
+<!--  <address>
+  Go back to <a href="#?p=787">Tutorial to download</a>
+ </address>-->
+</footer>
+<!-- Footer Element Ends Here -->
+</div>
+<!-- Div Wrapper Element ends Here -->
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block sidebarcontent %} 
+{% for result in member_results %}
+<p><a href="/?contact={{ result.first_name }}">{{ result.first_name }}</a></p>
+{% endfor %}
+{% endblock %}

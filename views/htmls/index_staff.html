@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block sidebarcontent %}  
+{% for result in entry_results %}
+<p><a href="?entry={{ result.entry_id }}">{{ result.title }}</a></p>
+{% endfor %}
+
+{% endblock %}
+
+{% block bodycontent %}
+<p><a href="/?search_volunteers_by_skill_form=True">Search</a></p>
+
+{% endblock %}

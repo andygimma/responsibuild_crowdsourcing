@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block sidebarcontent %} 
+<h2>Tags</h2>
+{% for result in tag_results %}
+<p><a href="/?singletag={{ result.tag }}">{{ result.tag }}</a></p>
+{% endfor %}
+{% endblock %}
