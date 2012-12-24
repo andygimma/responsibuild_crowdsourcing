@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block sidebarcontent %}  
+<ul>
+{% for result in post_results %}
+
+<li><a href="?post={{ result.post_id }}">{{ result.title }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}
+
+{% block bodycontent %}
+<article>
+  <header>
+    <h2>Welcome to the Alpha version of Responsibuild's crowdsourcing web app!</h2>
+  </header>
+<!-- Article's Header Element Ends Here -->  
+<p>Thanks for visiting our site and joining our project! Our goal is to create a single website where homeowners and communities can come find ways to sustainably rebuild after a disaster, or build anytime. We came together in the aftermath of Hurricane Sandy in New York City, after working for various volunteer projects, and came to one conclusion. There wasn't a single place that the public could go, to learn about every facet of rebuilding in a sustainable way. There are many sites, and there is a lot of info out there, and during a disaster, the last thing you have time for, is spending hours online trying to find how to fix your flooded basement. You want answers, you want them quick, and you want it to be right.</p>
+<p><strong>That's where you come in!</strong></p>
+</p>After very little time trying to gather the data ourselves, we realized very quickly why a project of this importance has never been done. There is a mountain of data to sift through, and it's not possible to do it with a small centralized team. So, we are going to let anyone who wants post information on how to sustainably rebuild. If you have any experience in building or volunteering, please leave your knowledge here. As this community continues to grow, we plan on making it a killer network, that will allow people to keep in touch, ask questions, and organize during disasters. So again, post what you can, and invite people to do the same!</p>
+<!--   <p>Thanks for visiting the site! Responsibuild's goal is to build a website where people anywhere, whether they are homeowners, volunteers, or experts in their field, can come and share information on how to best rebuild after a disaster. This effort came out of a tech meetup after Hurricane Sandy in NYC...</p> -->
+ <!-- Article's Header Element Starts Here -->
+  <header>
+    <h2>How to use this site (quick and easy instructions)</h2>
+  </header>
+<!-- Article's Header Element Ends Here -->  
+  <p>Most simply, click log in on the top right, and enter your info. After you are logged in, a button that says "Add Post" will appear next to the Log In/Log Out button. Click "Add Post" to add a post with a title, comma separated categories, and text information about whatever subject you would like to contribute to.</p>
+  <p>In addition to adding posts, you can click to view our timeline, which is already on the left of your screen. This is a timeline of all posts so far, in descending order. Above, you can click organizations, to see all organizations that members have mentioned being a part of. Then contacts, which gives you a list of all contributers. And finally categories, which shows you a list of all tags. The rest of the buttons are pretty straighforward.</p>
+    <header>
+    <h2>Recent Changes to the site, and what comes next</h2>
+  </header>
+<!-- Article's Header Element Ends Here -->  
+  <p>There aren't any changes to list yet, since this is version 1 of the alpha.</p> 
+  <p>In the coming days, we plan to add a cool mapping tool, using <a href="http://leafletjs.com">LeafletJS</a>, a powerful open-source mapping tool. We are also going to allow users to add info about their own organizations, as well as fill out the Contacts pages. Right now you will only be able to see the name of a contact.</p>
+  <p>In the medium and long term, we plan on making this a killer platform to share ideas with one another, and soon after, the public. After we gather data on a subject here, we plan on having an expert curate that data, and then post the curated page for a comment period, where we can collaboratively improve that page. After that is over, we will post it on our main page, for people everywhere to use. We can't wait to see how this project grows, and we hope you're excited too! Thanks again for using the site, check back often, and tell lots of people about the site!"
+  <header>
+</article>
+
+
+{% endblock %}

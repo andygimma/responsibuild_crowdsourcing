@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block bodycontent %} 
+{% for result in post_results %}
+<p>{{ result.title }}</p>
+<p>{{ result.tags }}</p>
+<p>{{ result.entry }}</p>
+{% if login_check %}
+<p><a href="/?comment={{result.post_id}}">Comment</a></p>
+{% endif %}
+{% endfor %}
+{% if show_comment_form %}
+<form action="/comment" class="form"  method="post">
+<fieldset>
+<div>
+<label for="comment" class="label">Comment</label>
+<input type="text" class="input" name="comment" />
+</div>
+<input type="hidden" name="post_id" value="{{post_id}}">
+
+<br/>
+<div align="center">
+<button class="submit">Finished</button>
+</div>
+<br/>
+</fieldset>
+{% endif %}
+{% endblock%}

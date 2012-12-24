@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block sidebarcontent %} 
+{% for result in organization_results %}
+<p><a href="/?organization={{ result.name }}">{{ result.name }}</a></p>
+{% endfor %}
+{% endblock %}

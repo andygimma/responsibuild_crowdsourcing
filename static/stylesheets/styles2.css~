@@ -1,0 +1,91 @@
+
+
+.scroll {
+    height: 100px;
+    overflow: auto;
+}
+
+
+#container {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.horizontal {
+    display: inline;
+}
+p {
+    font-size: 150%;
+    color: white;
+}
+
+a {
+    color: white;
+}
+body {
+    background: url("/images/blue.jpg");
+    background-repeat: no-repeat;
+    background-position: center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+/*
+#header {
+    width:100%;
+    padding-bottom: 2%;
+    height: auto;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    background-color: #707070;
+}
+*/
+
+#content {
+    float:left;
+    width:70%;
+    height: 52em;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    margin:0;
+    padding: 0;
+}
+
+#sidebar {
+    float:left;
+    width:25%;
+    height: 52em;;
+    font-weight: bold;
+    text-align: center;
+    color: white; 
+    margin:0;
+    padding: 0;
+    border-right: solid;
+}
+
+.paddingbottom {
+    padding-bottom: 3em;
+    color: white;
+}
+pre {
+    color: black;
+    font-size: 150%;
+}
+/*
+#footer {
+    clear:both;
+    width:100%;
+    padding-top: 2%;
+    height: auto;
+    color: white;
+    background-color: #404040;
+    font-weight: bold;
+    text-align: center;
+}
+*/

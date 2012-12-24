@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block bodycontent %} 
+
+<h3>{{ error_message }}</h3>
+<form action="/member_info" class="form"  method="post">
+<fieldset>
+
+<div>
+<label for="first_name" class="label">First Name </label>
+<input type="text" class="input" name="first_name" />
+</div>
+<br/>
+
+<div>
+<label for="last_name" class="label">Last Name</label>
+<input type="text" class="input" name="last_name" />
+</div>
+<br/>
+
+<p>Contact Info</p>
+
+<div>
+<label for="twitter" class="label">Twitter</label>
+<input type="text" class="input" name="twitter" />
+</div>
+<br/>
+
+<p>Basic Location Info</p>
+
+<div>
+<label for="city" class="label">City</label>
+<input type="text" class="input" name="city" />
+</div>
+<br/>
+<div>
+<label for="state" class="label">State (if applicable)</label>
+<input type="text" class="input" name="state" />
+</div>
+<br/>
+<div>
+<label for="Country" class="label">Country</label>
+<input type="text" class="input" name="country" />
+</div>
+<br/>
+
+
+<p>Organizations</p>
+
+<div align="center"><br>
+
+<br>
+</div>
+
+<div>
+<label for="organizations" class="label">Organizations (separate with a comma)</label>
+<input type="text" class="input" name="organizations" />
+</div>
+<br/>
+
+<div>
+<label for="anything_else" class="label">Is there anything else you would like us to know about yourself?</label>
+<input type="text" class="input" name="anything_else" />
+</div>
+<br/>
+
+<div align="center">
+<button class="submit">Finished</button>
+</div>
+<br/>
+
+</fieldset>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block bodycontent %} 
+
+<h3>{{ error_message }}</h3>
+<form action="/member_sign_up" class="form"  method="post">
+<fieldset>
+<div>
+<label for="hub_name" class="label">Hub Name </label>
+<input type="text" class="input" name="hub_name" />
+</div>
+<br/>
+<!--<div>
+<label for="location" class="label">Address</label>
+<input type="text" class="input" name="location" />
+</div>
+<br/>
+<div>
+<label for="phone_numbers" class="label">Phone Numbers</label>
+<input type="text" class="input" name="phone_numbers" />
+</div>
+<br/>
+<div>
+<label for="websites" class="label">Websites</label>
+<input type="text" class="input" name="websites" />
+</div>
+<br/>-->
+<div>
+<label for="password" class="label">Password</label>
+<input type="text" class="input" name="password" />
+</div>
+<br/>
+<div>
+<label for="password2" class="label">Re-Enter</label>
+<input type="text" class="input" name="password2" />
+</div>
+<br/>
+<div align="center">
+<button class="submit">Finished</button>
+</div>
+<br/>
+</fieldset>
+
+{% endblock %}

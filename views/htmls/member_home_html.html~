@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block sidebarcontent %}  
+{% for result in member_results %}
+<p>Screen name: {{ result }}</p>
+<p>Email: {{ result.email }}</p>
+<p>Twitter: {{ result.twitter }}</p>
+<p>Organizations: {{ result.orgs }}</p>
+
+  <nav class="navigation">
+    <a href="/?edit_member=True">Edit</a>
+      </nav>
+{% endfor %}
+{% endblock %}
+
+{% block bodycontent %}
+<h3>Organizations</h3>
+<h4>Can you fill out some more information about your organizations? It would really help make this site more useful for everyone involved.</h4>
+{% for org in unfinished_organizations_list %}
+<p><a href="/?add_info={{ org }}">{{ org }}</a></p>
+{% endfor %}
+
+{% if finished_organizations_list %}
+<h4>Finished Organizations</h4>
+{% endif %}
+{% for org in finished_organizations_list %}
+<p><a href="/?organization={{ org }}">{{ org }}</a></p>
+{% endfor %}
+
+{% endblock %}
