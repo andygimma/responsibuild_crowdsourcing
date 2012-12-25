@@ -55,6 +55,8 @@ def datastore_results(kind, filters, inequality_filters, order, fetch_total, off
                 q = model.Tag.all()
             if kind == "Comment":
                 q = model.Comment.all()
+            if kind == "Organization":
+                q = model.Organization.all()
                 
         except:
             #self.redirect('/?' + urllib.urlencode({'error': 1}))

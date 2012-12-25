@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block sidebarcontent %} 
-<h2>Contacts</h2>
 {% for result in contact_results %}
 <p><a href="/?organization={{ result.first_name }}">{{ result.first_name }}</a></p>
 {% endfor %}

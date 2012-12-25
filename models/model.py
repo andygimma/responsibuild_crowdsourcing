@@ -30,6 +30,8 @@ class Post(db.Model):
     entry = db.TextProperty(required=True)
     tags_list = db.StringListProperty(required=True)
     timestamp = db.StringProperty(required=True)
+    points = db.IntegerProperty(required=False)
+    
     
 class Tag(db.Model):
     tag = db.StringProperty(required=True)
@@ -40,6 +42,8 @@ class Comment(db.Model):
     comment_id = db.StringProperty(required=True)
     post_id = db.StringProperty(required=True)
     timestamp = db.StringProperty(required=True)
+    points = db.IntegerProperty(required=True)
+    
     
 class Organization(db.Model):
     name = db.StringProperty(required=True)
@@ -53,13 +57,21 @@ class Organization(db.Model):
     lat = db.StringProperty(required=False)
     lng = db.StringProperty(required=False)
     
+class FlagPost(db.Model):
+    post_id = db.StringProperty(required=True)
+    email = db.StringProperty(required=True)
+    title = db.StringProperty(required=True)
+    tags = db.StringProperty(required=True)
+    entry = db.TextProperty(required=True)
+    tags_list = db.StringListProperty(required=True)
+    timestamp = db.StringProperty(required=True)
+    points = db.IntegerProperty(required=True)
+    added_by = db.IntegerProperty(required=True)
     
-    
-    
-    
-    
-    
-    
+class PlusMinusConstraints(db.Model):
+    post_id = db.StringProperty(required=True)
+    email = db.StringProperty(required=True)
+    points = db.IntegerProperty(required=True)
     
     
     

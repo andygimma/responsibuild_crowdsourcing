@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block sidebarcontent %}  
 {% for result in member_results %}
-<p>Screen name: {{ result }}</p>
+<p>Screen name: {{ result.first_name }}</p>
 <p>Email: {{ result.email }}</p>
 <p>Twitter: {{ result.twitter }}</p>
 <p>Organizations: {{ result.orgs }}</p>
+<p>About me: {{ result.anything_else }}</p>
 
   <nav class="navigation">
     <a href="/?edit_member=True">Edit</a>

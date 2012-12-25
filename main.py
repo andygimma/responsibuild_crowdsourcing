@@ -1,63 +1,3 @@
-#!/usr/bin/env python
-#
-# Copyright 2007 Google Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
-
-
-####
-#
-#
-#
-#  Hub Com
-#  
-#  Tier 1
-#  Hubs upload their basic needs, resources, cars and volunteers
-#  They can add their resources, and change them as needed
-#  Same with needs
-#  As cars go out, the Car object will let all hubs (but specifically the hub they are arriving at) what resources they have, and perhaps and arrival time
-#  
-#  Also, volunteers can be better reached and activated
-#  
-#  
-#  Tier 2
-#  Within hubs, we want to keep track of who is where, and how resources are being moved
-#  Hopefully from this information, we can find out how to more effectively move resources, including good, services and volunteers who provide them
-#  
-#  
-#  Tier 3
-#  Allow for canvassers to upload info directly from their canvas sheets
-#  Have a location, names of those living their, volunteer who added it, and a basic 1-5 scale on how important the need.
-#  
-#  Have a basic checklist for immediate needs
-#
-#  
-#  
-#  Tasks: 
-#  Change gaesessions cookie in appengine_config.py
-#  Create a list of hubs that only an admin can add, this way we don't have people signin in who we don't want to.
-#  
-#  
-#  Needs:
-#  
-#  Someone to sanitize inputs
-#  $ to pay for it
-#  memcache
-#  
-#  
-####
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 import os
@@ -111,6 +51,11 @@ from controllers.show_add_organization_info_form import show_add_organization_in
 from controllers.put_organization_info import put_organization_info
 from controllers.show_maps_html import show_maps_html
 from controllers.get_hash import get_hash
+from controllers.put_post_plus_one import put_post_plus_one
+from controllers.put_post_minus_one import put_post_minus_one
+from controllers.put_post_flag import put_post_flag
+
+
 
 
 
@@ -301,7 +246,23 @@ class OrganizationInfo(webapp.RequestHandler):
         put_organization_info(self)
         self.redirect('/?' + urllib.urlencode({'home_page': "True"}))
         
-    
+class PlusOne(webapp.RequestHandler):
+    def post(self):
+        post_id = put_post_plus_one(self)
+        self.redirect('/?' + urllib.urlencode({'post': post_id}))
+        
+class MinusOne(webapp.RequestHandler):
+    def post(self):
+        post_id = put_post_minus_one(self)
+        self.redirect('/?' + urllib.urlencode({'post': post_id}))
+        
+class Flag(webapp.RequestHandler):
+    def post(self):
+        post_id = put_post_flag(self)
+        self.redirect('/?')
+        
+        
+        
 def main():
     application = webapp.WSGIApplication([
         ('/', MainHandler),
@@ -312,6 +273,9 @@ def main():
         ('/add_post', AddPost),
         ('/comment', Comment),
         ('/organization_info', OrganizationInfo),
+        ('/plus_one', PlusOne),
+        ('/minus_one', MinusOne),
+        ('/flag', Flag),
         
         ],
                                          debug=True)

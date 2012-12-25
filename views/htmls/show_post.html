@@ -2,11 +2,26 @@
 {% block bodycontent %} 
 {% for result in post_results %}
 <h2>{{ result.title }}</h2>
+<h3>Points: {{ result.points }}</h3>
+
 <p><pre>{{ result.entry }}</pre></p>
+<form class="horizontal" action="/flag" method="post" class="horizontal">
+  <input type="hidden" name="post_id" value="{{ result.post_id }}" />
+  <input type="submit" class="submit" value="Flag As Inappropriate" />
+</form>
+<form class="horizontal" action="/plus_one" method="post" class="horizontal">
+  <input type="hidden" name="post_id" value="{{ result.post_id }}" />
+  <input type="submit" class="submit" value="1+" />
+</form>
+<form class="horizontal" action="/minus_one" method="post" class="horizontal">
+  <input type="hidden" name="post_id" value="{{ result.post_id }}" />
+  <input type="submit" class="submit" value="1-" />
+</form>
 {% if logged_in %}
 <p><a href="/?comment={{result.post_id}}"><strong>Leave a comment</strong></a></p>
 </p>Please feel encouraged to leave comments on the site. The more information we gather, the better information we can give to people!</p>
 {% endif %}
+
 {% endfor %}
 
 <h3>Comments</h3>

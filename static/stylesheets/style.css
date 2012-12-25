@@ -80,6 +80,10 @@ Main Styles
 .navigation a:active{
         background: #fff;
 }
+.horizontal {
+    display: inline;
+}
+
 
 #title h1 a, #title h1 a:hover, #title h1 a:hover, #title h1 a:hover  { 
         margin: 40px auto 20px auto;

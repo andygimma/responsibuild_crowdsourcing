@@ -314,4 +314,5 @@ pre
     white-space: -pre-wrap;      /* Opera 4-6 */
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;      
+    font-family: Cambria, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif
 }

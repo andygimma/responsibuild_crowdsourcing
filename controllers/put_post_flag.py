@@ -24,6 +24,8 @@ from controllers.show_error_html import show_error_html
 from controllers.put_tag import put_tag
 from controllers.get_date_time import get_date_time
 from controllers.get_hash import get_hash
+from controllers.datastore_results import datastore_results
+
 
 
 
@@ -32,8 +34,8 @@ import random
 
 
 
-def put_post(self):
-    logging.debug("put_post")
+def put_post_flag(self):
+    logging.debug("put_post_flag")
     
     continue_boolean = False
     email = ""
@@ -48,24 +50,27 @@ def put_post(self):
         
         
     if continue_boolean:
-        title = self.request.get("title")
-        tags = self.request.get("tags")
-        entry = self.request.get("entry")
+        post_id = self.request.get("post_id")
 
-        
-        tags_list = []
-        final_list = []
-        tags = tags.lower()
-        tags_list = tags.split(",")
-       
-        for item in tags_list:
-            final_item = item.strip()
-            put_tag(self, final_item)
+        filters = {
+            "post_id": post_id,
+        }
+        results, results_exist = datastore_results("Post", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
+        key = None
+        points = 0
+        for result in results:
+            key = result.key()
+            post_id = result.post_id
+            email = result.email
+            title = result.title
+            tags = result.tags
+            entry = result.entry
+            tags_list = result.tags_list
+            timestamp = result.timestamp
+            points = result.points
+            user_email = session['email']
             
-            final_list.append(final_item)
-        new_hash = get_hash()
-        timestamp = get_date_time()
-        p = model.Post(post_id = new_hash, email = email, title = title, tags = tags, entry = entry, tags_list = final_list, timestamp = timestamp, points=0)
-        p.put()
-        
-        return new_hash        
+            p = model.FlagPost(post_id = post_id, email = email, title = title, tags = tags, entry = entry, tags_list = tags_list, timestamp = timestamp, points=points, added_by = user_email)
+            p.put()
+            db.delete(key)
+        return post_id

@@ -65,7 +65,7 @@ def put_post(self):
             final_list.append(final_item)
         new_hash = get_hash()
         timestamp = get_date_time()
-        p = model.Post(post_id = new_hash, email = email, title = title, tags = tags, entry = entry, tags_list = tags_list, timestamp = timestamp)
+        p = model.Post(post_id = new_hash, email = email, title = title, tags = tags, entry = entry, tags_list = final_list, timestamp = timestamp, )
         p.put()
         
         return new_hash        

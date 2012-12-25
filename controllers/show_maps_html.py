@@ -25,30 +25,29 @@ from controllers.datastore_results import datastore_results
 
 def show_maps_html(self):
     logging.debug("show_maps_html")
-    login_check = check_login(self)
-    if login_check:
+    #if login_check:
         #try:
-        path = os.path.join(os.path.dirname(__file__))
-        path_length = path.__len__()
-        final_path = path[0:path_length-11] + 'views/htmls/main_maps_html.html'
+    path = os.path.join(os.path.dirname(__file__))
+    path_length = path.__len__()
+    final_path = path[0:path_length-11] + 'views/htmls/main_maps_html.html'
+    
+    logging.debug("path = " + path)
+    logging.debug("final_path = " + final_path)
+    logged_in = check_login(self)
         
-        logging.debug("path = " + path)
-        logging.debug("final_path = " + final_path)
-        logged_in = check_login(self)
-            
-        results, results_exist = datastore_results("Organization", filters = None, inequality_filters = None, order = None, fetch_total = 1000, offset = 0, mem_key = None)
-        
-        data = {
-            "logged_in": logged_in,
-            "title_kind": "Maps",
-            "organization_results": results,
-        }
-        
-        self.response.out.write(template.render(final_path, data))         
+    results, results_exist = datastore_results("Organization", filters = None, inequality_filters = None, order = None, fetch_total = 1000, offset = 0, mem_key = None)
+    
+    data = {
+        "logged_in": logged_in,
+        "title_kind": "Maps",
+        "organization_results": results,
+    }
+    
+    self.response.out.write(template.render(final_path, data))         
         #except:
             #logging.debug("exception")
             #show_error_html(self, "template error")
-    else:
-        self.redirect('/?' + urllib.urlencode({'member_login': True}))
+    #else:
+        #self.redirect('/?' + urllib.urlencode({'member_login': True}))
         
         

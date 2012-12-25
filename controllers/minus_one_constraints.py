@@ -24,6 +24,8 @@ from controllers.show_error_html import show_error_html
 from controllers.put_tag import put_tag
 from controllers.get_date_time import get_date_time
 from controllers.get_hash import get_hash
+from controllers.datastore_results import datastore_results
+
 
 
 
@@ -32,40 +34,27 @@ import random
 
 
 
-def put_post(self):
-    logging.debug("put_post")
-    
-    continue_boolean = False
-    email = ""
-    #try:
+def minus_one_constraints(self, post_id):
+    logging.debug("put_post_plus_one")
     session = get_current_session()
     email = session['email']
-    continue_boolean = True
-    #except:
-        #logging.debug("gaesessions exception, do not continue")
-        #continue_boolean = False
-        #show_error_html(self, "session error")
+    
+    filters = {
+        "post_id": post_id,
+        "email": email,
+    }
+    
+    results, results_exist = datastore_results("PlusMinusConstraints", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
+    points = 0
+    if results_exist:
+        for result in results:
+            points = result.points
         
+    #print points
+    if points < 0:
+        return False
+    else:
+        return True
         
-    if continue_boolean:
-        title = self.request.get("title")
-        tags = self.request.get("tags")
-        entry = self.request.get("entry")
-
-        
-        tags_list = []
-        final_list = []
-        tags = tags.lower()
-        tags_list = tags.split(",")
-       
-        for item in tags_list:
-            final_item = item.strip()
-            put_tag(self, final_item)
-            
-            final_list.append(final_item)
-        new_hash = get_hash()
-        timestamp = get_date_time()
-        p = model.Post(post_id = new_hash, email = email, title = title, tags = tags, entry = entry, tags_list = final_list, timestamp = timestamp, points=0)
-        p.put()
-        
-        return new_hash        
+    
+    
