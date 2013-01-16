@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width; initial-scale=1" />
-<!-- <link rel="stylesheet" href="/stylesheets/leaflet.css" /> -->
+<!-- <link rel="stylesheet" href="/stylesheets/leaflet.css" />
+ -->
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css" />
 <script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
 
@@ -44,7 +45,9 @@
 <header id="header">
         <!-- Hgroup Element Starts Here -->
   <hgroup id="title">
-        <div id="logo"></div>
+        <div>
+        <h2 class="maintitle">3Rorg</h2>
+        </div>
     <!--<h1>Creating HTML5 <span>Responsive Web Template Using Media Queries</span></h1>-->
 <!--     <h2>A<small> Responsive</small> web template!</h2> -->
     <h2>Respond, Rebuild, Responsibly</h2>
@@ -57,7 +60,7 @@
     <a href="/?showtags=True" target="_blank">Categories</a>
     <a href="/?show_organizations=True">Organizations</a>
     <a href="/?show_contacts=True">Members</a>
-    <a href="/?show_contacts=True">Members</a>
+    <a href="/?show_maps=True">Maps</a>
     <a href="https://twitter.com/3Rorg" target="_blank">JOIN US on TWITTER</a>
 <!--       <a href="#" target="_blank">JOIN US on FACEBOOK</a> -->
     <a href="/?contact_us=True">Contact Us</a>

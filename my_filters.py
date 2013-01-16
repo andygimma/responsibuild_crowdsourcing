@@ -5,12 +5,34 @@ import model
 from google.appengine.api import memcache
 import logging
 from controllers.datastore_results import datastore_results
+from gaesessions import get_current_session
+
 
 
 
 
 @register.simple_tag
 @stringfilter
+@register.filter(name="check_ownership")
+def check_ownership(email):
+    session = get_current_session()
+    session_email = session['email']
+    if session_email == email:
+        return True
+    else:
+        return False
+#####
+# to be used this way
+
+#{% if result.email|check_ownership %}
+#<a href>Delete</a><a href>Edit</a>
+#{% endif %}
+
+#
+#####
+        
+        
+        
 @register.filter(name='email_to_name')
 def email_to_name(request):
     filters = {

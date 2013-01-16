@@ -37,7 +37,6 @@ import random
 
 def put_post_minus_one(self):
     logging.debug("put_post_minus_one")
-    
     continue_boolean = False
     email = ""
     #try:
@@ -67,6 +66,8 @@ def put_post_minus_one(self):
             
             if key is not None:
                 p = model.Post.get(key)
+                if points is None:
+                    points = 0
                 p.points = points - 1
                 p.put()
                 
@@ -77,6 +78,7 @@ def put_post_minus_one(self):
                 
                 results, results_exist = datastore_results("PlusMinusConstraints", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
                 points = 0
+                
                 if results_exist:
                     for result in results:
                         points = result.points
@@ -84,8 +86,23 @@ def put_post_minus_one(self):
                         pm = model.PlusMinusConstraints.get(key)
                         pm.points = points - 1
                         pm.put()
+
+                
                 else:
                     pm = model.PlusMinusConstraints(email = email, post_id = post_id, points = points - 1)
                     pm.put()
+                        
+                    filters = {
+                        "email": email,
+                    }
+                    results, results_exist = datastore_results("Member", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
+                    if results_exist:
+                        for result in results:
+                            key = result.key()
+                            points = result.rep_points
+                  
+                            member = model.Member.get(key)
+                            member.rep_points = points - 10
+                            member.put()
                 
         return post_id

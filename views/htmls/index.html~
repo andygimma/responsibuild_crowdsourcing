@@ -4,6 +4,9 @@
 {% for result in post_results %}
 
 <li><a href="?post={{ result.post_id }}">{{ result.title }}</a></li>
+{% if result.email|check_ownership %}
+Owned
+{% endif %}
 {% endfor %}
 </ul>
 {% endblock %}
@@ -55,6 +58,13 @@
   <li>You can now vote up or vote down a post. In the background, the app makes sure that you don't add more than one, or subtract more than one from a post. But if you hit "1+", and meant "1-", you can hit one minus twice, and add a cumulative -1 to the post.</li>
   <li>More info on the contacts pages</li>
   <li>Anyone can now flag a post as inappropriate. After review, we can add it or delete it, and we have the member info of whoever posted it</li>
+  <li>Added a map with markers for each organization on the organizations page</li>
+  </ul>
+  <p>Version 4! Uodated 1/10/13</p>
+    <ul>
+  <li>Bug fixes</li>
+    <li>Added a rich text editor so we can have nicer looking posts.</li>
+
   </ul>
   <p>Next version</p>
   <ul>

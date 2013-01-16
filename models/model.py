@@ -21,6 +21,7 @@ class Member(db.Model):
     anything_else = db.StringProperty(required=False)
     orgs_list = db.StringListProperty(required=True)
     location = db.StringProperty(required=False)
+    rep_points = db.IntegerProperty(default=0)
     
 class Post(db.Model):
     post_id = db.StringProperty(required=True)

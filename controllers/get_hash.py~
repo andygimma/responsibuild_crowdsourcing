@@ -39,7 +39,6 @@ def get_hash(string = None):
     h = ""
     if string:
         hash_string = time + seed + string
-        print hash_string
         h = hashlib.sha1(seed + string)
         #print 3
     else:

@@ -2,6 +2,11 @@
 /* CSS Document */
 
 /*HTML5 Tags Styles starts here */
+
+.maintitle
+{
+    font-size: 500%;
+}
 header, hgroup, nav, article, section, footer, aside, address{ display:block;}
 time{  font-style:italic; padding:0px 5px;}
 address{ font-size:11px; padding:10px 10px; text-align:right }
@@ -80,6 +85,10 @@ Main Styles
 .navigation a:active{
         background: #fff;
 }
+.horizontal {
+    display: inline;
+}
+
 
 #title h1 a, #title h1 a:hover, #title h1 a:hover, #title h1 a:hover  { 
         margin: 40px auto 20px auto;
@@ -304,7 +313,8 @@ textarea
     border:1px solid #999999;
     width:95%;
     margin:5px 0;
-    padding:3px;
+    padding:3px;        
+    background-color: white;
 }
 
 pre
@@ -316,3 +326,4 @@ pre
     word-wrap: break-word;      
     font-family: Cambria, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif
 }
+
