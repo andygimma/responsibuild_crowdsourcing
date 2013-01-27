@@ -53,17 +53,20 @@ def put_organization_info(self):
         name = self.request.get("name")
         organization = self.request.get("organization")
         email = self.request.get("email")
+        street_address = self.request.get("street_address")
         city = self.request.get("city")
         state = self.request.get("state")
         country = self.request.get("country")
         notes = self.request.get("notes")
-        address = city + " " + state + " " + country
-        
-        g = geocoders.OpenMapQuest()
-        place, (lat, lng) = g.geocode(address)  
+        address = street_address + " " + city + " " + state + " " + country
+        print address
+
         
         if not state:
-            address = city + " " + country
+            address = street_address + " " + city + " " + country
+         
+        g = geocoders.OpenMapQuest()
+        place, (lat, lng) = g.geocode("274 quincy st Brooklyn ny usa")  
             
         filters = {
             "name": name,

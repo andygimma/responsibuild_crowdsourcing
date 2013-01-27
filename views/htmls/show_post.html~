@@ -2,7 +2,7 @@
 {% block bodycontent %} 
 {% for result in post_results %}
 <h2>{{ result.title }}</h2>
-<h3>Points: {{ result.points }}</h3?
+<h3>Points: {{ result.points }}</h3>
 
 <p><pre>{{ result.entry }}</pre></p>
 <form class="horizontal" action="/flag" method="post" class="horizontal">
@@ -22,19 +22,38 @@
 </p>Please feel encouraged to leave comments on the site. The more information we gather, the better information we can give to people!</p>
 {% endif %}
 
-{% endfor %}
 
 <h3>Comments</h3>
 {% for result in comment_results %}
 <p>by: {{ result.email|email_to_name }}</p>
 <p>{{ result.timestamp|prettify }}</p>
 <p><pre>{{ result.comment}}</pre></p>
+<form class="horizontal" action="/comment_flag" method="post" class="horizontal">
+  <input type="hidden" name="comment_id" value="{{ result.comment_id }}" />
+  <input type="hidden" name="post_id" value="{{ result.post_id }}" />
+  <input type="submit" class="submit" value="Flag As Inappropriate" />
+</form>
+<form class="horizontal" action="/comment_plus_one" method="post" class="horizontal">
+  <input type="hidden" name="comment_id" value="{{ result.comment_id }}" />
+  <input type="hidden" name="post_id" value="{{ result.post_id }}" />
+  <input type="submit" class="submit" value="1+" />
+</form>
+<form class="horizontal" action="/comment_minus_one" method="post" class="horizontal">
+  <input type="hidden" name="comment_id" value="{{ result.comment_id }}" />
+  <input type="hidden" name="post_id" value="{{ result.post_id }}" />
+  <input type="submit" class="submit" value="1-" />
+</form>
 {% endfor %}
+
+{% endfor %}
+
 {% endblock %}
 
 {% block sidebarcontent %}
 {% for result in post_results %}
 <p>Author: {{ result.email|email_to_name }}</p>
+<p>Reputation Points: {{ result.rep_points }}</p> 
+
 <p>Date: {{ result.timestamp|prettify }}</p>
 {% endfor %}
 <p>Tags: {% for result in post_results %}{% for tag in result.tags_list %}<a href="/?singletag={{tag}}">{{tag}}</a> {% endfor %}{%endfor%}

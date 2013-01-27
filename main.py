@@ -20,6 +20,9 @@ import hashlib
 import geopy
 #from controllers.register import register
 
+from wtforms import Form, BooleanField, TextField, validators, PasswordField, ValidationError
+
+
 from controllers.show_member_sign_up_form import show_member_sign_up_form
 from controllers.show_index_html import show_index_html
 from controllers.show_member_login_form import show_member_login_form
@@ -54,6 +57,16 @@ from controllers.get_hash import get_hash
 from controllers.put_post_plus_one import put_post_plus_one
 from controllers.put_post_minus_one import put_post_minus_one
 from controllers.put_post_flag import put_post_flag
+from controllers.put_comment_flag import put_comment_flag
+from controllers.put_comment_plus_one import put_comment_plus_one
+from controllers.put_comment_minus_one import put_comment_minus_one
+from controllers.show_send_invite_form import show_send_invite_form
+from controllers.send_invite import send_invite
+from controllers.put_feedback import put_feedback
+
+
+
+import settings
 
 
 
@@ -61,8 +74,11 @@ from controllers.put_post_flag import put_post_flag
 
 
 
-template.register_template_library('my_filters')
 
+
+
+#template.register_template_library('my_filters')
+webapp.template.register_template_library('filters.my_filters')
 
 
 
@@ -85,10 +101,12 @@ class MainHandler(webapp.RequestHandler):
         organization_param = self.request.get("organization")
         show_contact_param = self.request.get("contact")
         home_page_param = self.request.get("home_page")
-        contact_us_param = self.request.get("contact_us")
+        contact_us_param = self.request.get("feedback")
         about_us_param = self.request.get("about_us")
         add_info_param = self.request.get("add_info")
         show_maps_param = self.request.get("show_maps")
+        send_invite_param = self.request.get("send_invite")
+        accept_invite_param = self.request.get("accept_invite")
         
         
         
@@ -151,6 +169,12 @@ class MainHandler(webapp.RequestHandler):
             
         elif show_maps_param:
             show_maps_html(self)
+            
+        elif send_invite_param:
+            show_send_invite_form(self)
+            
+        elif accept_invite_param:
+            show_member_sign_up_form(self)
         else:
             logging.debug("main page")
             show_index_html(self)
@@ -160,69 +184,139 @@ class MainHandler(webapp.RequestHandler):
 
 class MemberSignUp(webapp.RequestHandler):
     def post(self):
-        saved = put_member_sign_up(self)
-        if saved:
-            session = get_current_session()
-            session['member'] = True
-            self.redirect('/?' + urllib.urlencode({'member_info': True}))
+        form = SignInForm(self.request.POST)
+        if not form.validate():
+            path = os.path.join(os.path.dirname(__file__))
+            path_length = path.__len__()
+            final_path = path + '/views/htmls/member_sign_up_form.html'
+            #print final_path
+            data = {
+                'form': form,
+            }
+            self.response.out.write(template.render(final_path, data))     
+        else:
+            saved = put_member_sign_up(self)
+            if saved:
+                session = get_current_session()
+                session['member'] = True
+                self.redirect('/?' + urllib.urlencode({'member_info': True}))
         
 class MemberLogin(webapp.RequestHandler):
     def post(self):
-        login_check = login_member(self)
-        email = self.request.get("email")
-        password = self.request.get("password")
-        hashed_password = get_hash(password)
-        filters = {
-            "email": email,
-            "password": hashed_password,
-        }
-        session = get_current_session()
-        session.clear()
-        
-        results, results_exist = datastore_results("Member", filters = filters, inequality_filters = None, order = None, fetch_total = 1000, offset = 0, mem_key = None)
-        if results_exist:
+        form = SignInForm(self.request.POST)
+        if not form.validate():
+            path = os.path.join(os.path.dirname(__file__))
+            path_length = path.__len__()
+            final_path = path + '/views/htmls/member_login_form.html'
+            #print final_path
+            data = {
+                'form': form,
+            }
+            self.response.out.write(template.render(final_path, data))         
+        else:
+            login_check = login_member(self)
+            email = self.request.get("email")
+            password = self.request.get("password")
+            hashed_password = get_hash(password)
+            filters = {
+                "email": email,
+                "password": hashed_password,
+            }
             session = get_current_session()
-            session['member'] = True
-            session['email'] = email
+            session.clear()
             
-            if login_check:
-            ### check for first name, if first name, go to main page
+            results, results_exist = datastore_results("Member", filters = filters, inequality_filters = None, order = None, fetch_total = 1000, offset = 0, mem_key = None)
+            if results_exist:
                 session = get_current_session()
                 session['member'] = True
+                session['email'] = email
                 
-                email = session['email']
-                filters = {
-                    "email": email,
-                }
-                
-                results, results_exist = datastore_results("Member", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
-                first_name = None
-                if results_exist:
-                    for result in results:
-                        first_name = result.first_name
-                        
-                if first_name is None:
-                    self.redirect('/?' + urllib.urlencode({'member_info': True}))
-                else:
-                    self.redirect('/?' + urllib.urlencode({'home_page': True}))
-                
-                
-        else:
-            self.redirect('/?' + urllib.urlencode({'member_login': True}))
+                if login_check:
+                ### check for first name, if first name, go to main page
+                    session = get_current_session()
+                    session['member'] = True
+                    
+                    email = session['email']
+                    filters = {
+                        "email": email,
+                    }
+                    
+                    results, results_exist = datastore_results("Member", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
+                    first_name = None
+                    if results_exist:
+                        for result in results:
+                            first_name = result.first_name
+                            
+                    if first_name is None:
+                        self.redirect('/?' + urllib.urlencode({'member_info': True}))
+                    else:
+                        self.redirect('/?' + urllib.urlencode({'home_page': True}))
+                    
+                    
+            else:
+                self.redirect('/?' + urllib.urlencode({'member_login': True}))
             
             #show_error_html(self, "email and password combination not found, press back to try again")
 
-                
-        
-        
+class PostForm(Form):
+    tags = TextField('Tags', [validators.Required()])
+    title = TextField('Title', [validators.Required()])
+    entry = TextField('Entry', [
+        validators.Length(min=20)
+        ])
+    def validate_length(self, form, field):
+        if len(field.data) > 20:
+            raise ValidationError('Entry too short')
+    
+    
+class SignInForm(Form):
+    email = TextField('Email', [
+        validators.Length(min=6),
+        validators.Email()
+        ])
+    password = TextField('Tags', [validators.Required()])
+    
+class SignUpForm(Form):
+    email = TextField('Email', [
+        validators.Length(min=6),
+        validators.Email()
+        ])
+    password = TextField('Password', [validators.Required()])
+    password2 = TextField('Password2', [validators.Required()])
+    
+class MemberInfoForm(Form):
+    first_name = TextField('First Name', [validators.Required()])
+    last_name = TextField('Last Name', [validators.Required()])
+    #twitter = TextField('Password', [validators.Required()])
+    # just check if it's a twitter handle
+    city = TextField('City', [validators.Required()])
+    #state = TextField('Password', [validators.Required()])
+    country = TextField('Country', [validators.Required()])
+    organizations = TextField('Organizations', [validators.Required()])
+    #anything_else = TextField('Anything Else', [validators.Required()])
+    
+    
+    
+    
 class MemberInfo(webapp.RequestHandler):
     def post(self):
-        member_info_boolean = put_member_info(self)
-        if member_info_boolean is True:
-            self.redirect('/?' + urllib.urlencode({'home_page': True}))
+        form = MemberInfoForm(self.request.POST)
+        if not form.validate():
+            path = os.path.join(os.path.dirname(__file__))
+            path_length = path.__len__()
+            final_path = path + '/views/htmls/member_info_form.html'
+            #print final_path
+            data = {
+                'form': form,
+            }
+            self.response.out.write(template.render(final_path, data))         
         else:
-            pass
-            #show_error_html("database_error")
+            member_info_boolean = put_member_info(self)
+            if member_info_boolean is True:
+                self.redirect('/?' + urllib.urlencode({'home_page': True}))
+            else:
+                pass
+                #show_error_html("database_error")
             
 
 class SearchVolunteersBySkill(webapp.RequestHandler):
@@ -231,8 +325,19 @@ class SearchVolunteersBySkill(webapp.RequestHandler):
         
 class AddPost(webapp.RequestHandler):
     def post(self):
-        post_id = put_post(self)
-        self.redirect('/?' + urllib.urlencode({'post': post_id}))
+        form = PostForm(self.request.POST)
+        if not form.validate():
+            path = os.path.join(os.path.dirname(__file__))
+            path_length = path.__len__()
+            final_path = path + '/views/htmls/add_post.html'
+            #print final_path
+            data = {
+                'form': form,
+            }
+            self.response.out.write(template.render(final_path, data))         
+        else:         
+            post_id = put_post(self)
+            self.redirect('/?' + urllib.urlencode({'post': post_id}))
         
             
             
@@ -261,8 +366,36 @@ class Flag(webapp.RequestHandler):
         post_id = put_post_flag(self)
         self.redirect('/?')
         
+class CommentFlag(webapp.RequestHandler):
+    def post(self):
+        post_id = put_comment_flag(self)
+        self.redirect('/?' + urllib.urlencode({'post': post_id}))
         
+class CommentPlusOne(webapp.RequestHandler):
+    def post(self):
+        post_id = put_comment_plus_one(self)
+        self.redirect('/?' + urllib.urlencode({'post': post_id}))
         
+class CommentMinusOne(webapp.RequestHandler):
+    def post(self):
+        post_id = put_comment_minus_one(self)
+        self.redirect('/?' + urllib.urlencode({'post': post_id}))
+        
+class SendInvite(webapp.RequestHandler):
+    def post(self):
+        if send_invite(self):
+            # send to invite page again, confirming email sent to, and asking if user would like to send another email
+            self.redirect('/')
+        else:
+            print error
+            
+class SendFeedback(webapp.RequestHandler):
+    def post(self):
+        if put_feedback(self):
+            logging.debug("feedback")
+        else:
+            logging.debug("feedback didn't work")
+    
 def main():
     application = webapp.WSGIApplication([
         ('/', MainHandler),
@@ -276,6 +409,12 @@ def main():
         ('/plus_one', PlusOne),
         ('/minus_one', MinusOne),
         ('/flag', Flag),
+        ('/comment_flag', CommentFlag),
+        ('/comment_plus_one', CommentPlusOne),
+        ('/comment_minus_one', CommentMinusOne),
+        ('/send_invite', SendInvite),
+        ('/send_feedback', SendFeedback),
+        
         
         ],
                                          debug=True)

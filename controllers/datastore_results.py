@@ -59,6 +59,10 @@ def datastore_results(kind, filters, inequality_filters, order, fetch_total, off
                 q = model.Organization.all()
             if kind == "PlusMinusConstraints":
                 q = model.PlusMinusConstraints.all()
+            if kind == "CommentPlusMinusConstraints":
+                q = model.CommentPlusMinusConstraints.all()
+            if kind == "Invites":
+                q = model.Invites.all()
                 
         except:
             #self.redirect('/?' + urllib.urlencode({'error': 1}))

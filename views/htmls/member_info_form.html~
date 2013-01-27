@@ -4,6 +4,17 @@
 <h3>{{ error_message }}</h3>
 <form action="/member_info" class="form"  method="post">
 <fieldset>
+ {% if form %}       
+    {% if form.first_name.errors %}
+        <ul class="errors">{% for error in form.first_name.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+    {% endif %}
+    {% if form.title.errors %}
+        <ul class="errors">{% for error in form.title.errors %}<li>Title{{ error }}</li>{% endfor %}</ul>
+    {% endif %}
+    {% if form.entry.errors %}
+        <ul class="errors">{% for error in form.entry.errors %}<li>Entry{{ error }}</li>{% endfor %}</ul>
+    {% endif %}
+{% endif %}
 
 <div>
 <label for="first_name" class="label">First Name </label>
@@ -42,9 +53,6 @@
 <input type="text" class="input" name="country" />
 </div>
 <br/>
-
-
-<p>Organizations</p>
 
 <div align="center"><br>
 

@@ -1,6 +1,7 @@
 application: 3rorgtest
-version: 11
-runtime: python
+version: 33
+runtime: python27
+threadsafe: no
 api_version: 1
 
 handlers:

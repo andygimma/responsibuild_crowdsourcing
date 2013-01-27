@@ -43,7 +43,7 @@ class Comment(db.Model):
     comment_id = db.StringProperty(required=True)
     post_id = db.StringProperty(required=True)
     timestamp = db.StringProperty(required=True)
-    points = db.IntegerProperty(required=True)
+    points = db.IntegerProperty(required=True, default=0)
     
     
 class Organization(db.Model):
@@ -69,10 +69,28 @@ class FlagPost(db.Model):
     points = db.IntegerProperty(required=True)
     added_by = db.IntegerProperty(required=True)
     
+class FlagComment(db.Model):
+    comment = db.TextProperty(required=True)
+    email = db.StringProperty(required=True)
+    comment_id = db.StringProperty(required=True)
+    post_id = db.StringProperty(required=True)
+    timestamp = db.StringProperty(required=True)
+    points = db.IntegerProperty(required=True, default=0)
+    
 class PlusMinusConstraints(db.Model):
     post_id = db.StringProperty(required=True)
     email = db.StringProperty(required=True)
     points = db.IntegerProperty(required=True)
     
+class CommentPlusMinusConstraints(db.Model):
+    comment_id = db.StringProperty(required=True)
+    email = db.StringProperty(required=True)
+    points = db.IntegerProperty(required=True)
     
+class Invites(db.Model):
+    invite_hash = db.StringProperty(required=True)
+    email = db.StringProperty(required=True)
+    
+class Feedback(db.Model):
+    feedback = db.TextProperty(required=True)
     

@@ -53,6 +53,7 @@ def put_post_plus_one(self):
         
     if continue_boolean:
         post_id = self.request.get("post_id")
+        post_email = ""
         if plus_one_constraints(self, post_id):
 
             filters = {
@@ -63,6 +64,7 @@ def put_post_plus_one(self):
             points = 0
             for result in results:
                 key = result.key()
+                post_email = result.email
                 points = result.points
             
             if key is not None:
@@ -91,7 +93,7 @@ def put_post_plus_one(self):
                     
                                             
                     filters = {
-                        "email": email,
+                        "email": post_email,
                     }
                     results, results_exist = datastore_results("Member", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
                     if results_exist:
@@ -100,7 +102,7 @@ def put_post_plus_one(self):
                             points = result.rep_points
                             
                             member = model.Member.get(key)
-                            member.rep_points = points + 10
+                            member.rep_points = points + 4
                             member.put()
                 
                 

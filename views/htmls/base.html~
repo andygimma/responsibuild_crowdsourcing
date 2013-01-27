@@ -25,6 +25,21 @@
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
                         })();
                 </script>
+<!--  <script>            
+  
+                function listCookies() {
+    var theCookies = document.cookie.split(';');
+    var aString = '';
+    for (var i = 1 ; i <= theCookies.length; i++) {
+        aString += i + ' ' + theCookies[i-1] + "\n";
+    }
+    alert(aString);
+    return aString;
+}
+  var cookieString = listCookies()
+  alert(cookieString);
+
+</script>-->
 </head>
 <body>
 <!-- BuySellAds Ad Code -->
@@ -46,7 +61,7 @@
         <!-- Hgroup Element Starts Here -->
   <hgroup id="title">
         <div>
-        <h2 class="maintitle">3Rorg</h2>
+        <h1 class="maintitle">3Rorg</h1>
         </div>
     <!--<h1>Creating HTML5 <span>Responsive Web Template Using Media Queries</span></h1>-->
 <!--     <h2>A<small> Responsive</small> web template!</h2> -->
@@ -63,7 +78,7 @@
     <a href="/?show_maps=True">Maps</a>
     <a href="https://twitter.com/3Rorg" target="_blank">JOIN US on TWITTER</a>
 <!--       <a href="#" target="_blank">JOIN US on FACEBOOK</a> -->
-    <a href="/?contact_us=True">Contact Us</a>
+    <a href="/?contact_us=True">Feedback</a>
     <a href="/?about_us=True">About Us</a>
 
       {% if logged_in %}

@@ -48,6 +48,7 @@ def put_member_info(self):
         twitter = self.request.get("twitter")
         organizations = self.request.get("organizations")
         anything_else = self.request.get("anything_else")
+        address = self.request.get("address")
         city = self.request.get("city")
         state = self.request.get("state")
         country = self.request.get("country")
@@ -55,7 +56,7 @@ def put_member_info(self):
         if state:
             location = city + " " +  state + " " + country
         else:
-            location = city + country
+            location = city + " " + country
         
         filters = {
             "email": email,

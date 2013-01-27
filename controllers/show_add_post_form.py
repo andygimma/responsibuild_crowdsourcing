@@ -26,6 +26,8 @@ def show_add_post_form(self):
     path = os.path.join(os.path.dirname(__file__))
     path_length = path.__len__()
     final_path = path[0:path_length-11] + 'views/htmls/add_post.html'
+    #print final_path
+    
     
     logging.debug("path = " + path)
     logging.debug("final_path = " + final_path)

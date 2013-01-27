@@ -3,15 +3,30 @@
 
 <div id="sample">
 <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
-<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);
-var newNic = new nicEditor({buttonList : ['fontSize','bold','italic','underline','strikeThrough','subscript','superscript','html']}).panelInstance('area1');
-newNic.panelInstance('textentry')
+<script type="text/javascript">
+// var newNic = new nicEditor({buttonList : ['fontSize','bold','italic','underline','strikeThrough','subscript','superscript','html']}).panelInstance('textentry');
+// newNic.panelInstance('textentry');
+// bkLib.onDomLoaded(nicEditors.allTextAreas);
+bkLib.onDomLoaded(function() {
+      nicEditors.allTextAreas({buttonList : ['bold','italic','underline', 'left', 'center', 'right', 'justify', 'ol', 'ul', 'strikeThrough', 'indent', 'outdent', 'fontSize', 'fontFamily', 'fontFormat']});
+   }); 
 </script>
-        
 
 <h3>{{ error_message }}</h3>
+
 <form action="/add_post" class="form"  method="post">
 <fieldset>
+ {% if form %}       
+    {% if form.tags.errors %}
+        <ul class="errors">{% for error in form.tags.errors %}<li>Categories: This is the most important field.</li>{% endfor %}</ul>
+    {% endif %}
+    {% if form.title.errors %}
+        <ul class="errors">{% for error in form.title.errors %}<li>Title{{ error }}</li>{% endfor %}</ul>
+    {% endif %}
+    {% if form.entry.errors %}
+        <ul class="errors">{% for error in form.entry.errors %}<li>Entry{{ error }}</li>{% endfor %}</ul>
+    {% endif %}
+{% endif %}
 <div>
 <label for="title" class="label">Title</label>
 <input type="text" class="input" name="title" size=80 />

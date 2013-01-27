@@ -9,6 +9,10 @@
 </div>
 <br/>
 <div>
+<label for="street_address" class="label">Address</label>
+<input type="text" class="input" name="street_address" />
+</div>
+<div>
 <label for="city" class="label">City</label>
 <input type="text" class="input" name="city" />
 </div>
@@ -19,12 +23,12 @@
 </div>
 <br/>
 <div>
-<label for="Country" class="label">Country</label>
-<input type="text" class="input" name="Country" />
+<label for="country" class="label">Country</label>
+<input type="text" class="input" name="country" />
 </div>
 <br/>
 <label for="notes" class="label">Describe your organization</label>
-<textarea name="entry" class="input2" rows="20" ></textarea>
+<textarea name="notes" class="input2" rows="20" ></textarea>
 <br/>
 <input type="hidden" name="name" value="{{ name }}">
 <div align="center">

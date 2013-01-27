@@ -51,6 +51,18 @@ def put_comment(self):
     
         c = model.Comment(comment = comment, email = email, comment_id = new_hash, post_id = post_id, timestamp = timestamp)
         c.put()
+        filters = {
+            "email": email,
+        }
+        results, results_exist = datastore_results("Member", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
+        if results_exist:
+            for result in results:
+                key = result.key()
+                points = result.rep_points
+                
+                member = model.Member.get(key)
+                member.rep_points = points + 5
+                member.put()
         return post_id
             
                 

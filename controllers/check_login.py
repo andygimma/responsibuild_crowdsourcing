@@ -57,5 +57,14 @@ def check_login(self):
         #if results_exist:
             #logged_in = True
         #else:
-            #logged_in = False     
+            #logged_in = False    
+    if logged_in:
+        filters = {
+            "email": email,
+        }
+        results, results_exist = datastore_results("Member", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
+        if results_exist:
+            logged_in = True
+        else:
+            logged_in = False
     return logged_in

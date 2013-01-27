@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 {% block sidebarcontent %}  
+
+<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">
+// var newNic = new nicEditor({buttonList : ['fontSize','bold','italic','underline','strikeThrough','subscript','superscript','html']}).panelInstance('textentry');
+// newNic.panelInstance('textentry');
+// bkLib.onDomLoaded(nicEditors.allTextAreas);
+bkLib.onDomLoaded(function() {
+      nicEditors.allTextAreas({buttonList : ['bold','italic','underline', 'left', 'center', 'right', 'justify', 'ol', 'ul', 'strikeThrough', 'indent', 'outdent', 'fontSize', 'fontFamily', 'fontFormat']});
+   }); 
+</script>
 <h3>Name</h3>
 <p>Responsibuild</p>
 <h3>Created</h3>
@@ -16,6 +26,30 @@
 <p>responsibuildorg@gmail.com</p>
 
 <h3>Technical questions?</h3>
-<p>Contact Andy at andy.n.gimma@gmail.com, or <a href="https://twitter.com/3Rorg" >@andygimma</a> on Twitter</p>
-<p>
+<p>Contact Andy at andy.n.gimma@gmail.com, or <a href="https://twitter.com/andygimma" >@andygimma</a> on Twitter</p>
+<p>Or, send feeback using our form</p>
+<form action="/send_feedback" class="form"  method="post">
+<fieldset>
+ {% if form %}       
+    {% if form.tags.errors %}
+        <ul class="errors">{% for error in form.tags.errors %}<li>Categories: This is the most important field.</li>{% endfor %}</ul>
+    {% endif %}
+    {% if form.title.errors %}
+        <ul class="errors">{% for error in form.title.errors %}<li>Title{{ error }}</li>{% endfor %}</ul>
+    {% endif %}
+    {% if form.entry.errors %}
+        <ul class="errors">{% for error in form.entry.errors %}<li>Entry{{ error }}</li>{% endfor %}</ul>
+    {% endif %}
+{% endif %}
+<div>
+<label for="entry" class="label">Send Feedback Below</label>
+<br/>
+<textarea id="textentry" name="entry" class="input2" rows="20" >{{ result.entry }}</textarea>
+
+</div>
+<br/>
+<div align="center">
+<button class="submit">Finished</button>
+</div>
+<br/>
 {% endblock %}

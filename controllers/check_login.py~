@@ -19,7 +19,6 @@ import Cookie
 import hashlib
 from models import model
 from controllers.datastore_results import datastore_results
-from controllers.show_error_html import show_error_html
 
 
 
@@ -58,5 +57,11 @@ def check_login(self):
         #if results_exist:
             #logged_in = True
         #else:
-            #logged_in = False     
+            #logged_in = False    
+    if logged_in:
+        filters = {
+            "comment_id": comment_id,
+        }
+        results, results_exist = datastore_results("Comment", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
+     
     return logged_in
