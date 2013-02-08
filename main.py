@@ -63,6 +63,10 @@ from controllers.put_comment_minus_one import put_comment_minus_one
 from controllers.show_send_invite_form import show_send_invite_form
 from controllers.send_invite import send_invite
 from controllers.put_feedback import put_feedback
+from controllers.delete_post import delete_post
+from controllers.delete_comment import delete_comment
+
+
 
 
 
@@ -84,7 +88,7 @@ webapp.template.register_template_library('filters.my_filters')
 
 class MainHandler(webapp.RequestHandler):
     def get(self):
-        logging.debug("get_geocode")
+        logging.debug("main")
         
         session = get_current_session()
         member_login_param = self.request.get("member_login")
@@ -107,6 +111,9 @@ class MainHandler(webapp.RequestHandler):
         show_maps_param = self.request.get("show_maps")
         send_invite_param = self.request.get("send_invite")
         accept_invite_param = self.request.get("accept_invite")
+        edit_param = self.request.get("edit")
+        delete_post_param = self.request.get("delete_post")
+        delete_comment_param = self.request.get("delete_comment")
         
         
         
@@ -173,8 +180,17 @@ class MainHandler(webapp.RequestHandler):
         elif send_invite_param:
             show_send_invite_form(self)
             
+        elif edit_param:
+            show_add_post_form(self, post_id = edit_param)
+            
         elif accept_invite_param:
             show_member_sign_up_form(self)
+            
+        elif delete_post_param:
+            delete_post(delete_post_param)
+            
+        elif delete_comment_param:
+            delete_comment(delete_comment_param)
         else:
             logging.debug("main page")
             show_index_html(self)

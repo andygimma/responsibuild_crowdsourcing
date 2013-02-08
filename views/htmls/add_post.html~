@@ -21,7 +21,7 @@ bkLib.onDomLoaded(function() {
         <ul class="errors">{% for error in form.tags.errors %}<li>Categories: This is the most important field.</li>{% endfor %}</ul>
     {% endif %}
     {% if form.title.errors %}
-        <ul class="errors">{% for error in form.title.errors %}<li>Title{{ error|addTuring }}</li>{% endfor %}</ul>
+        <ul class="errors">{% for error in form.title.errors %}<li>Title{{ error }}</li>{% endfor %}</ul>
     {% endif %}
     {% if form.entry.errors %}
         <ul class="errors">{% for error in form.entry.errors %}<li>Entry{{ error }}</li>{% endfor %}</ul>
@@ -29,21 +29,23 @@ bkLib.onDomLoaded(function() {
 {% endif %}
 <div>
 <label for="title" class="label">Title</label>
-<input type="text" class="input" name="title" size=80 />
+<input {% if old_title%} value={{old_title}} {% endif %} type="text" class="input" name="title" size=80 />
 </div>
 <br/>
 
 <div>
 <label for="tags" class="label">Categories</label>
-<input type="text" class="input" name="tags" size=80 />
+<input {% if old_tags%} value={{old_tags}} {% endif %} type="text" class="input" name="tags" size=80 />
 </div>
 <br/>
 <div>
 <label for="entry" class="label">Entry</label>
-<textarea id="textentry" name="entry" class="input2" rows="20" >{{ result.entry }}</textarea>
+<textarea id="textentry" name="entry" class="input2" rows="20" value="old_entry">{% if old_entry%}{{old_entry}} {% endif %}</textarea>
 
 </div>
 <br/>
+<input type="hidden" name="old_hash" value="{{ result.post_id }}" />
+
 <div align="center">
 <button class="submit">Finished</button>
 </div>

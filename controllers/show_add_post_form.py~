@@ -18,14 +18,42 @@ from google.appengine.api import oauth
 import Cookie
 import hashlib
 from controllers.check_login import check_login
+from controllers.datastore_results import datastore_results
 
 
-def show_add_post_form(self):
+
+def show_add_post_form(self, post_id = None):
     logging.debug("show_index_html")
     #try:
+    session = get_current_session()
+    email = session['email']
+    
+    old_entry = None
+    old_tags = None
+    old_title = None
+    old_hash = None
+    
+    if post_id:
+        filters = {
+            "email": email,
+            "post_id": post_id,
+        }
+        results, results_exist = datastore_results("Post", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
+        
+        if not results_exist:
+            return False
+            
+        for result in results:
+            old_entry = result.entry
+            old_tags = result.tags
+            old_title = result.title
+            old_hash = result.post_id
+        
+        
+        
     path = os.path.join(os.path.dirname(__file__))
     path_length = path.__len__()
-    final_path = path[0:path_length-11] + '/views/htmls/add_post.html'
+    final_path = path[0:path_length-11] + 'views/htmls/add_post.html'
     #print final_path
     
     
@@ -34,10 +62,12 @@ def show_add_post_form(self):
 
     logged_in = check_login(self)
     
-    
     data = {
         "logged_in": logged_in,
-        "title_kind": "What makes a good post"
+        "title_kind": "What makes a good post",
+        "old_entry": old_entry,
+        "old_title": old_title,
+        "old_tags": old_tags,
     }
         
         

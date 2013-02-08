@@ -29,21 +29,23 @@ bkLib.onDomLoaded(function() {
 {% endif %}
 <div>
 <label for="title" class="label">Title</label>
-<input type="text" class="input" name="title" size=80 />
+<input {% if old_title%} value={{old_title}} {% endif %} type="text" class="input" name="title" size=80 />
 </div>
 <br/>
 
 <div>
 <label for="tags" class="label">Categories</label>
-<input type="text" class="input" name="tags" size=80 />
+<input {% if old_tags%} value={{old_tags}} {% endif %} type="text" class="input" name="tags" size=80 />
 </div>
 <br/>
 <div>
 <label for="entry" class="label">Entry</label>
-<textarea id="textentry" name="entry" class="input2" rows="20" >{{ result.entry }}</textarea>
+<textarea id="textentry" name="entry" class="input2" rows="20" value="old_entry">{% if old_entry%}{{old_entry}} {% endif %}</textarea>
 
 </div>
 <br/>
+<input type="hidden" name="old_hash" value={{ old_hash }} />
+
 <div align="center">
 <button class="submit">Finished</button>
 </div>
