@@ -20,6 +20,7 @@ import hashlib
 from controllers.check_login import check_login
 from controllers.show_error_html import show_error_html
 from controllers.datastore_results import datastore_results
+from controllers.delete_tag import delete_tag
 
 
 
@@ -38,11 +39,15 @@ def show_single_tag_html(self, tag):
     }
     results, results_exist = datastore_results("Post", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
     
-    
+    no_results = False
+    if results_exist == False:
+        no_results = True
+        delete_tag(tag)
     data = {
         "logged_in": logged_in,
         "tag_results": results,
         "title_kind": "All results with: " + tag,
+        "no_results": no_results,
     }
     
     self.response.out.write(template.render(final_path, data))         

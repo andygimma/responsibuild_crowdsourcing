@@ -18,23 +18,23 @@ bkLib.onDomLoaded(function() {
 <fieldset>
  {% if form %}       
     {% if form.tags.errors %}
-        <ul class="errors">{% for error in form.tags.errors %}<li>Categories: This is the most important field.</li>{% endfor %}</ul>
+        <ul class="errors">{% for error in form.tags.errors %}<li>Categories: This is the most important field. This tells other users what your post is about.</li>{% endfor %}</ul>
     {% endif %}
     {% if form.title.errors %}
-        <ul class="errors">{% for error in form.title.errors %}<li>Title{{ error }}</li>{% endfor %}</ul>
+        <ul class="errors">{% for error in form.title.errors %}<li>Title: {{ error }}</li>{% endfor %}</ul>
     {% endif %}
     {% if form.entry.errors %}
-        <ul class="errors">{% for error in form.entry.errors %}<li>Entry{{ error }}</li>{% endfor %}</ul>
+        <ul class="errors">{% for error in form.entry.errors %}<li>Entry: {{ error }}</li>{% endfor %}</ul>
     {% endif %}
 {% endif %}
 <div>
-<label for="title" class="label">Title</label>
+<label for="title" class="label">Title</label><br/>
 <input {% if old_title%} value={{old_title}} {% endif %} type="text" class="input" name="title" size=80 />
 </div>
 <br/>
 
 <div>
-<label for="tags" class="label">Categories</label>
+<label for="tags" class="label">Subjects (comma separated, read on the left for more info)</label>
 <input {% if old_tags%} value={{old_tags}} {% endif %} type="text" class="input" name="tags" size=80 />
 </div>
 <br/>
@@ -57,8 +57,8 @@ bkLib.onDomLoaded(function() {
 {% block sidebarcontent %}
 <h3>Title</h3>
 <p>Make your title concise. When another user is looking through a list of links, for proper information, all they will see is the title.</p>
-<h3>Categories</h3>
-<p>It's important to come up with good tags, because this is the other most common way a user will search through the posts on this site. What broader categories will this post fall under? Is it about construction? Is it about mold removal? Is it about outdoor space? Use as many as you feel is necessary and <bold>separate multiple tags with commas</bold></p>
+<h3>Subjects</h3>
+<p>It's important to come up with good subject tags, because this is the other most common way a user will search through the posts on this site. What broader categories or subjects will this post fall under? Is it about construction? Is it about mold removal? Is it about outdoor space? Use as many as you feel is necessary and <bold>separate multiple tags with commas</bold>.</p>
 <h3>Entry</h3>
 <p>Entry is the most straight forward. Just add any information you think would be useful.</p>
 

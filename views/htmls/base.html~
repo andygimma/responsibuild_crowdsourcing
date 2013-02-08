@@ -78,7 +78,7 @@
     <a href="/?show_maps=True">Maps</a>
     <a href="https://twitter.com/3Rorg" target="_blank">JOIN US on TWITTER</a>
 <!--       <a href="#" target="_blank">JOIN US on FACEBOOK</a> -->
-    <a href="/?contact_us=True">Feedback</a>
+    <a href="/?feedback=True">Feedback</a>
     <a href="/?about_us=True">About Us</a>
 
       {% if logged_in %}

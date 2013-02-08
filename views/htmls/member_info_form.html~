@@ -6,13 +6,19 @@
 <fieldset>
  {% if form %}       
     {% if form.first_name.errors %}
-        <ul class="errors">{% for error in form.first_name.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+        <ul class="errors">{% for error in form.first_name.errors %}<li>First Name: {{ error }}</li>{% endfor %}</ul>
     {% endif %}
-    {% if form.title.errors %}
-        <ul class="errors">{% for error in form.title.errors %}<li>Title{{ error }}</li>{% endfor %}</ul>
+    {% if form.last_name.errors %}
+        <ul class="errors">{% for error in form.last_name.errors %}<li>Last Name: {{ error }}</li>{% endfor %}</ul>
     {% endif %}
-    {% if form.entry.errors %}
-        <ul class="errors">{% for error in form.entry.errors %}<li>Entry{{ error }}</li>{% endfor %}</ul>
+    {% if form.city.errors %}
+        <ul class="errors">{% for error in form.city.errors %}<li>City: {{ error }}</li>{% endfor %}</ul>
+    {% endif %}
+    {% if form.country.errors %}
+        <ul class="errors">{% for error in form.country.errors %}<li>Country {{ error }}</li>{% endfor %}</ul>
+    {% endif %}
+    {% if form.organizations.errors %}
+        <ul class="errors">{% for error in form.organizations.errors %}<li>Organizaiton: {{ error }}</li>{% endfor %}</ul>
     {% endif %}
 {% endif %}
 

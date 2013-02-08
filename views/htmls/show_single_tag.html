@@ -4,3 +4,10 @@
 <p><a href="/?post={{ result.post_id }}">{{ result.title }}</a></p>
 {% endfor %}
 {% endblock %}
+
+{% block bodycontent %}
+{% if no_results %}
+<h2>No Results!</h2>
+<p>This probably means a post was deleted and this subject no longer points to any posts. It has been deleted. Please press subjects to return to the subjects list.</p>
+{% endif %}
+{% endblock %}

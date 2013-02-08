@@ -43,7 +43,8 @@ def put_comment(self):
     comment = self.request.get("comment")
     post_id = self.request.get("post_id")
     
-    
+    if not comment:
+        return False, post_id
     if continue_boolean:
         ### check db, if not in db put tag
         new_hash = get_hash()
@@ -61,8 +62,8 @@ def put_comment(self):
                 points = result.rep_points
                 
                 member = model.Member.get(key)
-                member.rep_points = points + 10
+                member.rep_points = points + 5
                 member.put()
-        return post_id
+        return True, post_id
             
                 

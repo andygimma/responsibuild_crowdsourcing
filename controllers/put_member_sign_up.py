@@ -22,6 +22,7 @@ from controllers.show_error_html import show_error_html
 from controllers.datastore_results import datastore_results
 from controllers.get_hash import get_hash
 from controllers.check_invite_email_and_hash import check_invite_email_and_hash
+from controllers.delete_invite import delete_invite
 
 
 
@@ -51,8 +52,11 @@ def put_member_sign_up(self):
                 hashed_password = get_hash(password)
                 m = model.Member(email = email, password = hashed_password, category = category, skills_list = [""])
                 m.put()
+                delete_invite(invite_hash = invite_hash, invite_email = email)
             else:
-                print "not a member"
+                show_error_html(self, "Not the correct email for this invite.")
+                logging.debug("Incorrect email for invite")
+                return False
         except:
             logging.debug("datastore error")
             show_error_html(self, "database error")

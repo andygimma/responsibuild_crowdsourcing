@@ -22,7 +22,7 @@ import geopy
 
 from wtforms import Form, BooleanField, TextField, validators, PasswordField, ValidationError
 
-
+import wtforms
 from controllers.show_member_sign_up_form import show_member_sign_up_form
 from controllers.show_index_html import show_index_html
 from controllers.show_member_login_form import show_member_login_form
@@ -89,7 +89,6 @@ webapp.template.register_template_library('filters.my_filters')
 class MainHandler(webapp.RequestHandler):
     def get(self):
         logging.debug("main")
-        from models import model
         
         session = get_current_session()
         member_login_param = self.request.get("member_login")
@@ -189,9 +188,12 @@ class MainHandler(webapp.RequestHandler):
             
         elif delete_post_param:
             delete_post(delete_post_param)
+            self.redirect("/")
             
         elif delete_comment_param:
             delete_comment(delete_comment_param)
+            self.redirect("/")
+            
         else:
             logging.debug("main page")
             show_index_html(self)
@@ -206,7 +208,6 @@ class MemberSignUp(webapp.RequestHandler):
             path = os.path.join(os.path.dirname(__file__))
             path_length = path.__len__()
             final_path = path + '/views/htmls/member_sign_up_form.html'
-            #print final_path
             data = {
                 'form': form,
             }
@@ -275,7 +276,28 @@ class MemberLogin(webapp.RequestHandler):
             
             #show_error_html(self, "email and password combination not found, press back to try again")
 
+class OrganizationForm(Form):
+    notes = TextField('Describe your organizaiton', [
+    validators.Length(min=20)
+    ])
+    email = TextField('Email', [
+    validators.Length(min=6),
+    validators.Email()
+    ])
+    
+class InviteForm(Form):
+    email = PasswordField('Email', [validators.Required(), validators.EqualTo('confirm_email', message='Email must match')])
+    confirm_email  = PasswordField('Repeat Email')
+
+    
+class FeedbackForm(Form):
+    feedback = TextField('Feedback', [
+    validators.Length(min=20)
+    ])
+
 class PostForm(Form):
+    tags = TextField('Subjects', [wtforms.validators.Length(min = 0, max = 100,
+    message = "Subjects required")])
     tags = TextField('Tags', [validators.Required()])
     title = TextField('Title', [validators.Required()])
     entry = TextField('Entry', [
@@ -347,8 +369,9 @@ class AddPost(webapp.RequestHandler):
             path = os.path.join(os.path.dirname(__file__))
             path_length = path.__len__()
             final_path = path + '/views/htmls/add_post.html'
-            #print final_path
+            logged_in = check_login(self)
             data = {
+                "logged_in": logged_in,
                 'form': form,
             }
             self.response.out.write(template.render(final_path, data))         
@@ -360,12 +383,23 @@ class AddPost(webapp.RequestHandler):
             
 class Comment(webapp.RequestHandler):
     def post(self):
-        post_id = put_comment(self)
+        is_valid, post_id = put_comment(self)
         self.redirect('/?' + urllib.urlencode({'post': post_id}))
         
 class OrganizationInfo(webapp.RequestHandler):
     def post(self):
-        put_organization_info(self)
+        form = OrganizationForm(self.request.POST)
+        if not form.validate():
+            path = os.path.join(os.path.dirname(__file__))
+            path_length = path.__len__()
+            final_path = path + '/views/htmls/show_add_organization_info_form.html'
+            data = {
+                'form': form,
+            }
+            self.response.out.write(template.render(final_path, data)) 
+            return
+        else:
+            put_organization_info(self)
         self.redirect('/?' + urllib.urlencode({'home_page': "True"}))
         
 class PlusOne(webapp.RequestHandler):
@@ -400,18 +434,49 @@ class CommentMinusOne(webapp.RequestHandler):
         
 class SendInvite(webapp.RequestHandler):
     def post(self):
-        if send_invite(self):
-            # send to invite page again, confirming email sent to, and asking if user would like to send another email
-            self.redirect('/')
+        form = InviteForm(self.request.POST)
+        if not form.validate():
+            logged_in = check_login(self)
+            path = os.path.join(os.path.dirname(__file__))
+            path_length = path.__len__()
+            final_path = path + '/views/htmls/show_send_invite_form.html'
+            data = {
+                'form': form,
+                "logged_in": logged_in,
+            }
+            self.response.out.write(template.render(final_path, data)) 
+            return
         else:
-            print error
+            if send_invite(self):
+                self.redirect('/')
+                return
+            else:
+                show_error_html(self, "Send invite didn't work, please contact us, or try again")
+                
             
 class SendFeedback(webapp.RequestHandler):
     def post(self):
-        if put_feedback(self):
-            logging.debug("feedback")
+        form = FeedbackForm(self.request.POST)
+        if not form.validate():
+            logged_in = check_login()
+            path = os.path.join(os.path.dirname(__file__))
+            path_length = path.__len__()
+            final_path = path + '/views/htmls/contact_us_html.html'
+            data = {
+                "logged_in": logged_in,
+                'form': form,
+            }
+            self.response.out.write(template.render(final_path, data))     
+            return
         else:
-            logging.debug("feedback didn't work")
+            if put_feedback(self):
+                self.redirect("/")
+                logging.debug("feedback")
+                return
+            else:
+                show_error_html(self, "Feedback didn't work, please email us and let us know what went wrong. Thanks!")
+                logging.debug("feedback didn't work")
+                return
     
 def main():
     application = webapp.WSGIApplication([

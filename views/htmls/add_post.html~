@@ -18,23 +18,23 @@ bkLib.onDomLoaded(function() {
 <fieldset>
  {% if form %}       
     {% if form.tags.errors %}
-        <ul class="errors">{% for error in form.tags.errors %}<li>Categories: This is the most important field.</li>{% endfor %}</ul>
+        <ul class="errors">{% for error in form.tags.errors %}<li>Categories: This is the most important field. This tells other users what your post is about.</li>{% endfor %}</ul>
     {% endif %}
     {% if form.title.errors %}
-        <ul class="errors">{% for error in form.title.errors %}<li>Title{{ error }}</li>{% endfor %}</ul>
+        <ul class="errors">{% for error in form.title.errors %}<li>Title: {{ error }}</li>{% endfor %}</ul>
     {% endif %}
     {% if form.entry.errors %}
-        <ul class="errors">{% for error in form.entry.errors %}<li>Entry{{ error }}</li>{% endfor %}</ul>
+        <ul class="errors">{% for error in form.entry.errors %}<li>Entry: {{ error }}</li>{% endfor %}</ul>
     {% endif %}
 {% endif %}
 <div>
-<label for="title" class="label">Title</label>
+<label for="title" class="label">Title</label><br/>
 <input {% if old_title%} value={{old_title}} {% endif %} type="text" class="input" name="title" size=80 />
 </div>
 <br/>
 
 <div>
-<label for="tags" class="label">Categories</label>
+<label for="tags" class="label">Subjects (comma separated, read on the left for more info)</label>
 <input {% if old_tags%} value={{old_tags}} {% endif %} type="text" class="input" name="tags" size=80 />
 </div>
 <br/>
@@ -44,7 +44,7 @@ bkLib.onDomLoaded(function() {
 
 </div>
 <br/>
-<input type="hidden" name="old_hash" value="{{ result.post_id }}" />
+<input type="hidden" name="old_hash" value={{ old_hash }} />
 
 <div align="center">
 <button class="submit">Finished</button>

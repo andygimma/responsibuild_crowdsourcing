@@ -31,14 +31,8 @@ bkLib.onDomLoaded(function() {
 <form action="/send_feedback" class="form"  method="post">
 <fieldset>
  {% if form %}       
-    {% if form.tags.errors %}
-        <ul class="errors">{% for error in form.tags.errors %}<li>Categories: This is the most important field.</li>{% endfor %}</ul>
-    {% endif %}
-    {% if form.title.errors %}
-        <ul class="errors">{% for error in form.title.errors %}<li>Title{{ error }}</li>{% endfor %}</ul>
-    {% endif %}
-    {% if form.entry.errors %}
-        <ul class="errors">{% for error in form.entry.errors %}<li>Entry{{ error }}</li>{% endfor %}</ul>
+    {% if form.feedback.errors %}
+        <ul class="errors">{% for error in form.feedback.errors %}<li>Feedback: {{ error }}</li>{% endfor %}</ul>
     {% endif %}
 {% endif %}
 <div>
