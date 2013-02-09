@@ -5,7 +5,7 @@
 <h2>{{ result.title }}</h2>
 <h3>Points: {{ result.points }}</h3>
 
-<p><pre>{{ result.entry }}</pre></p>
+{{ result.entry|safe }}
 
 {% if logged_in %}
 {% if result.email|check_ownership %}
@@ -75,5 +75,5 @@
 
 <p>Date: {{ result.timestamp|prettify }}</p>
 {% endfor %}
-<p>Tags: {% for result in post_results %}{% for tag in result.tags_list %}<a href="/?singletag={{tag}}">{{tag}}</a> {% endfor %}{%endfor%}
+<p>Subjects: {% for result in post_results %}{% for tag in result.tags_list %}<a href="/?singletag={{tag}}">{{tag}}</a> {% endfor %}{%endfor%}
 {% endblock %}
