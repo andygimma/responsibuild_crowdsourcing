@@ -65,6 +65,7 @@ from controllers.send_invite import send_invite
 from controllers.put_feedback import put_feedback
 from controllers.delete_post import delete_post
 from controllers.delete_comment import delete_comment
+from controllers.update_org import update_org
 
 
 
@@ -114,6 +115,7 @@ class MainHandler(webapp.RequestHandler):
         edit_param = self.request.get("edit")
         delete_post_param = self.request.get("delete_post")
         delete_comment_param = self.request.get("delete_comment")
+        #update_org_param = self.request.get("update_org")
         
         
         
@@ -193,6 +195,9 @@ class MainHandler(webapp.RequestHandler):
         elif delete_comment_param:
             delete_comment(delete_comment_param)
             self.redirect("/")
+            
+        elif update_org_param:
+            update_org(self)
             
         else:
             logging.debug("main page")
@@ -458,7 +463,7 @@ class SendFeedback(webapp.RequestHandler):
     def post(self):
         form = FeedbackForm(self.request.POST)
         if not form.validate():
-            logged_in = check_login()
+            logged_in = check_login(self)
             path = os.path.join(os.path.dirname(__file__))
             path_length = path.__len__()
             final_path = path + '/views/htmls/contact_us_html.html'

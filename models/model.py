@@ -54,7 +54,7 @@ class Organization(db.Model):
     city = db.StringProperty(required=False)
     state = db.StringProperty(required=False)
     country = db.StringProperty(required=False)
-    notes = db.StringProperty(required=False)
+    notes = db.TextProperty(required=False)
     lat = db.StringProperty(required=False)
     lng = db.StringProperty(required=False)
     

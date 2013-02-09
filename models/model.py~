@@ -91,3 +91,6 @@ class Invites(db.Model):
     invite_hash = db.StringProperty(required=True)
     email = db.StringProperty(required=True)
     
+class Feedback(db.Model):
+    feedback = db.TextProperty(required=True)
+    
