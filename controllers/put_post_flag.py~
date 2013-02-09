@@ -41,7 +41,7 @@ def put_post_flag(self):
     email = ""
     #try:
     session = get_current_session()
-    email = session['email']
+    #email = session['email']
     continue_boolean = True
     #except:
         #logging.debug("gaesessions exception, do not continue")
@@ -70,7 +70,7 @@ def put_post_flag(self):
             points = result.points
             user_email = session['email']
             
-            p = model.FlagPost(post_id = post_id, email = email, title = title, tags = tags, entry = entry, tags_list = tags_list, timestamp = timestamp, points=points)
+            p = model.FlagPost(post_id = post_id, email = email, title = title, tags = tags, entry = entry, tags_list = tags_list, timestamp = timestamp, points=points, added_by = user_email)
             p.put()
             db.delete(key)
         return post_id

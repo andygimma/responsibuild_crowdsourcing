@@ -52,9 +52,12 @@ def put_member_sign_up(self):
                 hashed_password = get_hash(password)
                 m = model.Member(email = email, password = hashed_password, category = category, skills_list = [""])
                 m.put()
+                print 1 
                 delete_invite(invite_hash = invite_hash, invite_email = email)
             else:
-                print "not a member"
+                show_error_html(self, "Not the correct email for this invite.")
+                logging.debug("Incorrect email for invite")
+                return False
         except:
             logging.debug("datastore error")
             show_error_html(self, "database error")

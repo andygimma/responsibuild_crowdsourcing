@@ -1,5 +1,5 @@
-application: 3rorgtest
-version: 32
+application: 3rorg-test
+version: 4
 runtime: python27
 threadsafe: no
 api_version: 1
