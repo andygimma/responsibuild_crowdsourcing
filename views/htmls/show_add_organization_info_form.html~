@@ -5,7 +5,7 @@
 <fieldset>
  {% if form %}       
     {% if form.email.errors %}
-        <ul class="errors">{% for error in form.email.errors %}<li>Email: Please fill in a valid email.</li>{% endfor %}</ul>
+        <ul class="errors">{% for error in form.email.errors %}<li>Email: {{ error }}</li>{% endfor %}</ul>
     {% endif %}
     {% if form.notes.errors %}
         <ul class="errors">{% for error in form.notes.errors %}<li>Description: {{ error }}</li>{% endfor %}</ul>

@@ -66,7 +66,7 @@ def put_organization_info(self):
             address = street_address + " " + city + " " + country
          
         g = geocoders.OpenMapQuest()
-        place, (lat, lng) = g.geocode("Brooklyn ny usa")  
+        place, (lat, lng) = g.geocode("274 quincy st Brooklyn ny usa")  
             
         filters = {
             "name": name,

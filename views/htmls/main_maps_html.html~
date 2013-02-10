@@ -7,7 +7,7 @@
         <div id="map" style="width: 700px; height: 400px"></div>
 
         <script>
-                var lat = 41.5501038
+                var lat = 40.0501038
                 var lng = -73.9495823
 //                 alert(lat + " " + lng);
                 

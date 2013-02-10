@@ -1,5 +1,5 @@
 application: 3rorg-test
-version: 10
+version: 11
 runtime: python27
 threadsafe: no
 api_version: 1
@@ -14,6 +14,9 @@ handlers:
   
 - url: /images
   static_dir: static/images
+  
+- url: /jquery
+  static_dir: static/jquery
   
 - url: .*
   script: main.py
