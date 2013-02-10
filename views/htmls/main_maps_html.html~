@@ -7,28 +7,62 @@
         <div id="map" style="width: 700px; height: 400px"></div>
 
         <script>
-                var lat = 40.0501038
-                var lng = -73.9495823
+                var lat = 40.6501038
+                var lng = -73.8495823
 //                 alert(lat + " " + lng);
                 
-                var map = L.map('map').setView([lat, lng], 10);
+//                 var map = L.map('map').setView([lat, lng], 10);
+// 
+//                 L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+//                         maxZoom: 18,
+//                         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+//                 }).addTo(map);
+var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
+                        cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade, Points &copy 2012 LINZ',
+                        cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 17, attribution: cloudmadeAttribution}),
+                        latlng = new L.LatLng(lat, lng);
 
-                L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
-                        maxZoom: 18,
-                        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
-                }).addTo(map);
+                var map = new L.Map('map', {center: latlng, zoom: 11, layers: [cloudmade]});
 
-
-                L.marker([lat, lng]).addTo(map)
-                        .bindPopup("<b>{{result.name}}</b><br />").openPopup();
-                {% for result in organization_results %}
-                var result_lat = {{ result.lat }};
-                var result_lng = {{ result.lng }};
+                var markers = new L.MarkerClusterGroup();
                 
-                    L.marker([result_lat, result_lng]).addTo(map)
-                            .bindPopup("<b>{{result.name}}</b><br />").openPopup();
+                var lat_lngs_list = [];
+                
+/*
+                L.marker([lat, lng]).addTo(map)
+                        .bindPopup("<b>{{result.name}}</b><br />").openPopup();*/
+                {% for result in organization_results %}
+                try{ 
+                        var result_lat = {{ result.lat }};
+//                         alert(result_lat);
+                        var result_lng = {{ result.lng }};
+//                         alert(result_lng);
+//                         var a = addressPoints[i];
+                        var title = "{{result.name}}";
+                        var lat_lng = new L.LatLng(result_lat, result_lng);
+//                         alert(lat_lng);
+                        lat_lngs_list.push(lat_lng);
+                        var marker = new L.Marker(new L.LatLng(result_lat, result_lng), { title: title });
+                        marker.bindPopup(title);
+                        markers.addLayer(marker);
+                        
+                    
+                    /*
+                        L.marker([result_lat, result_lng]).addTo(map)
+                                .bindPopup("<b>{{result.name}}</b><br />").openPopup();*/
+                } catch(e) {
+//                 alert(e.name + e.message);
+                }
                     
                 {% endfor %}
+//                 alert(lat_lngs_list);
+                try{
+                       var thin =  new L.LatLngBounds();
+                    alert(thin.getEast());
+                    map.addLayer(markers);
+                } catch(e) {
+                    alert(e.name + e.message);
+                }
                 
 /*
                 L.circle([51.508, -0.11], 500, {
@@ -55,6 +89,7 @@
 
                 map.on('click', onMapClick);
 */
+
 
         </script>
 
