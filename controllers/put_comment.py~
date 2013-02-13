@@ -29,6 +29,7 @@ import random
 
 def put_comment(self):
     logging.debug("put_post")
+    if check_login(self):
     
     continue_boolean = False
     email = ""
@@ -44,6 +45,7 @@ def put_comment(self):
     post_id = self.request.get("post_id")
     
     if not comment:
+        logging.debug("No comment entered")
         return False, post_id
     if continue_boolean:
         ### check db, if not in db put tag

@@ -9,14 +9,6 @@
         <script>
                 var lat = 40.6501038
                 var lng = -73.8495823
-//                 alert(lat + " " + lng);
-                
-//                 var map = L.map('map').setView([lat, lng], 10);
-// 
-//                 L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
-//                         maxZoom: 18,
-//                         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
-//                 }).addTo(map);
 var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
                         cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade, Points &copy 2012 LINZ',
                         cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 17, attribution: cloudmadeAttribution}),
@@ -25,58 +17,66 @@ var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D7597
                 var map = new L.Map('map', {center: latlng, zoom: 11, layers: [cloudmade]});
 
                 var markers = new L.MarkerClusterGroup();
-                
-/*
-                L.marker([lat, lng]).addTo(map)
-                        .bindPopup("<b>{{result.name}}</b><br />").openPopup();*/
+                var latLngList = [new L.LatLng(lat, lng)];
+
                 {% for result in organization_results %}
                 try{ 
                         var result_lat = {{ result.lat }};
-//                         alert(result_lat);
                         var result_lng = {{ result.lng }};
-//                         alert(result_lng);
-//                         var a = addressPoints[i];
                         var title = "{{result.name}}";
+                        var new_latlng = new L.LatLng(result_lat, result_lng);
+//                         alert(new_latlng);
+                        latLngList.push(new_latlng);
                         var marker = new L.Marker(new L.LatLng(result_lat, result_lng), { title: title });
                         marker.bindPopup(title);
                         markers.addLayer(marker);
-                        
-                    
-                    /*
-                        L.marker([result_lat, result_lng]).addTo(map)
-                                .bindPopup("<b>{{result.name}}</b><br />").openPopup();*/
+
                 } catch(e) {
 //                 alert(e.name + e.message);
                 }
+                
                     
                 {% endfor %}
-                map.addLayer(markers);
-                
-/*
-                L.circle([51.508, -0.11], 500, {
-                        color: 'red',
-                        fillColor: '#f03',
-                        fillOpacity: 0.5
-                }).addTo(map).bindPopup("I am a circle.");
-
-                L.polygon([
-                        [51.509, -0.08],
-                        [51.503, -0.06],
-                        [51.51, -0.047]
-                ]).addTo(map).bindPopup("I am a polygon.");
-
-
-                var popup = L.popup();
-
-                function onMapClick(e) {
-                        popup
-                                .setLatLng(e.latlng)
-                                .setContent("You clicked the map at " + e.latlng.toString())
-                                .openOn(map);
+                var last_bounds = L.LatLngBounds(latLngList);
+//                 alert(last_bounds);
+                var last_list;
+                for (var j = 0; j < latLngList.length; j++) {
+//                     alert(j);
+//                     alert(latLngList[j]);
+                    
                 }
 
-                map.on('click', onMapClick);
-*/
+
+//                 latLngList.pop();
+//                 alert("popped");
+                try{
+//                 map.fitBounds(latLngList);
+                } catch(e) {
+                alert(e.name + e.message);
+                
+                }
+//                 alert(map.getSize());   
+// alert(latLngList[1]);
+// alert(latLngList[6]);
+// var pointA = latLngList[2];
+// var pointB = latLngList[6];
+// var pointList = [pointA, pointB];
+// 
+// var firstpolyline = new L.Polyline(pointList, {
+// color: 'red',
+// weight: 3,
+// opacity: 0.5,
+// smoothFactor: 1
+// 
+// });
+// firstpolyline.addTo(map);
+//                 var polyline = L.polyline(latLngList, {color: 'red'}).addTo(map);
+// //                 alert(polyline);
+//                 map.fitBounds(polyline.getBounds());
+                map.fitBounds(latLngList);
+                map.addLayer(markers);
+//                 L.circle(latLngList[1], 20000).addTo(map);
+//                 alert(3);       
 
 
         </script>

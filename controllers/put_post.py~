@@ -68,7 +68,6 @@ def put_post(self):
         new_hash = get_hash()
         timestamp = get_date_time()
         key = check_post_duplicates(old_hash)
-        print key
         if key:
             p = model.Post.get(key)
             p.title = title

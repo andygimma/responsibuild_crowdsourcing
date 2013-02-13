@@ -18,6 +18,8 @@ from google.appengine.api import oauth
 import Cookie
 import hashlib
 from controllers.check_login import check_login
+from controllers.datastore_results import datastore_results
+
 
 
 def show_comment_form(self, post_id):

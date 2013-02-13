@@ -27,32 +27,35 @@ import random
 
 
 def put_tag(self, tag):
-    logging.debug("put_post")
-    
-    continue_boolean = False
-    email = ""
-    #try:
-    session = get_current_session()
-    email = session['email']
-    continue_boolean = True
-    #except:
-    #logging.debug("gaesessions exception, do not continue")
-    #continue_boolean = False
-    #show_error_html(self, "session error")
-    
-    tag = tag.lower()
-    tag = tag.strip()
-    if continue_boolean:
-        ### check db, if not in db put tag
-        filters = {
-            "tag": tag,
-        }
+    logging.debug("put_tag")
+    if check_login(self):
+            
         
-        results, results_exist = datastore_results("Tag", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
-        if results_exist:
-            logging.debug("tag already exists")
-        else:
-            t = model.Tag(tag = tag)
-            t.put()
+        continue_boolean = False
+        email = ""
+        #try:
+        session = get_current_session()
+        email = session['email']
+        continue_boolean = True
+        #except:
+        #logging.debug("gaesessions exception, do not continue")
+        #continue_boolean = False
+        #show_error_html(self, "session error")
+        
+        tag = tag.lower()
+        tag = tag.strip()
+        if continue_boolean:
+            ### check db, if not in db put tag
+            filters = {
+                "tag": tag,
+            }
             
-            
+            results, results_exist = datastore_results("Tag", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
+            if results_exist:
+                logging.debug("tag already exists")
+            else:
+                t = model.Tag(tag = tag)
+                t.put()
+                
+    else:
+        self.redirect("/")

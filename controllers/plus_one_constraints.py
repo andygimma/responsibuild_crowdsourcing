@@ -25,35 +25,30 @@ from controllers.put_tag import put_tag
 from controllers.get_date_time import get_date_time
 from controllers.get_hash import get_hash
 from controllers.datastore_results import datastore_results
-
-
-
-
 import random
-
-
-
 
 def plus_one_constraints(self, post_id):
     logging.debug("put_post_plus_one")
-    session = get_current_session()
-    email = session['email']
-    
-    filters = {
-        "post_id": post_id,
-    }
-    
-    results, results_exist = datastore_results("PlusMinusConstraints", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
-    points = 0
-    if results_exist:
-        for result in results:
-            points = result.points
+    if check_login(self):
+        session = get_current_session()
+        email = session['email']
         
-    #print points
-    if points > 0:
-        return False
+        filters = {
+            "post_id": post_id,
+        }
+        
+        results, results_exist = datastore_results("PlusMinusConstraints", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
+        points = 0
+        if results_exist:
+            for result in results:
+                points = result.points
+            
+        #print points
+        if points > 0:
+            return False
+        else:
+            return True
+            
+        
     else:
-        return True
-        
-    
-    
+        self.redirect("/")
