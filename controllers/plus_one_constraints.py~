@@ -51,7 +51,6 @@ def plus_one_constraints(self, post_id):
         
     #print points
     if points > 0:
-        print points
         return False
     else:
         return True

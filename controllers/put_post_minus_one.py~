@@ -26,17 +26,10 @@ from controllers.get_date_time import get_date_time
 from controllers.get_hash import get_hash
 from controllers.datastore_results import datastore_results
 from controllers.minus_one_constraints import minus_one_constraints
-
-
-
-
 import random
-
-
-
-
 def put_post_minus_one(self):
     logging.debug("put_post_minus_one")
+    if check_login(self):
     continue_boolean = False
     email = ""
     #try:
@@ -95,7 +88,7 @@ def put_post_minus_one(self):
                     pm.put()
                         
                     filters = {
-                        "email": email,
+                        "email": post_email,
                     }
                     results, results_exist = datastore_results("Member", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
                     if results_exist:

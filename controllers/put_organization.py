@@ -26,32 +26,33 @@ import random
 
 
 
-def put_organization(name):
+def put_organization(self, name):
     logging.debug("put_organization")
-    
-    continue_boolean = False
-    email = ""
-    #try:
-    session = get_current_session()
-    email = session['email']
-    continue_boolean = True
-    #except:
-    #logging.debug("gaesessions exception, do not continue")
-    #continue_boolean = False
-    #show_error_html(self, "session error")
-    
-    
-    if continue_boolean:
-        ### check db, if not in db put tag
-        filters = {
-            "name": name,
-        }
+    if check_login(self):
+        continue_boolean = False
+        email = ""
+        #try:
+        session = get_current_session()
+        email = session['email']
+        continue_boolean = True
+        #except:
+        #logging.debug("gaesessions exception, do not continue")
+        #continue_boolean = False
+        #show_error_html(self, "session error")
         
-        results, results_exist = datastore_results("Organization", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
-        if results_exist:
-            logging.debug("tag already exists")
-        else:
-            o = model.Organization(name = name, added_by = email)
-            o.put()
+        
+        if continue_boolean:
+            ### check db, if not in db put tag
+            filters = {
+                "name": name,
+            }
             
-            
+            results, results_exist = datastore_results("Organization", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
+            if results_exist:
+                logging.debug("tag already exists")
+            else:
+                o = model.Organization(name = name, added_by = email)
+                o.put()
+                
+    else:
+        self.redirect("/")

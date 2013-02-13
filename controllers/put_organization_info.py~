@@ -25,17 +25,9 @@ from controllers.put_tag import put_tag
 from controllers.get_date_time import get_date_time
 from controllers.get_hash import get_hash
 from geopy import geocoders  
-
-
-
-
 import random
-
-
-
-
 def put_organization_info(self):
-    logging.debug("put_post")
+    logging.debug("put_organization_info")
     
     continue_boolean = False
     email = ""
@@ -66,7 +58,7 @@ def put_organization_info(self):
             address = street_address + " " + city + " " + country
          
         g = geocoders.OpenMapQuest()
-        place, (lat, lng) = g.geocode("274 quincy st Brooklyn ny usa")  
+        place, (lat, lng) = g.geocode(address)  
             
         filters = {
             "name": name,

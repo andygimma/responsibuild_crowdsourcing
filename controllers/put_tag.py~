@@ -40,7 +40,8 @@ def put_tag(self, tag):
     #continue_boolean = False
     #show_error_html(self, "session error")
     
-    
+    tag = tag.lower()
+    tag = tag.strip()
     if continue_boolean:
         ### check db, if not in db put tag
         filters = {

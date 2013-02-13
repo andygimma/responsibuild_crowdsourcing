@@ -25,14 +25,7 @@ from controllers.put_tag import put_tag
 from controllers.get_date_time import get_date_time
 from controllers.get_hash import get_hash
 from controllers.datastore_results import datastore_results
-
-
-
-
 import random
-
-
-
 
 def put_post_flag(self):
     logging.debug("put_post_flag")
@@ -41,7 +34,7 @@ def put_post_flag(self):
     email = ""
     #try:
     session = get_current_session()
-    #email = session['email']
+    email = session['email']
     continue_boolean = True
     #except:
         #logging.debug("gaesessions exception, do not continue")

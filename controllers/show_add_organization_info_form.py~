@@ -44,7 +44,7 @@ def show_add_organization_info_form(self, name):
         "organization_results": organization_results,
         "single_organization_results": results,
         "title_kind": "Organizations",
-        "name": name.
+        "name": name,
     }
     
 

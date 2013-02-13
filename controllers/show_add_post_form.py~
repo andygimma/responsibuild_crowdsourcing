@@ -61,7 +61,6 @@ def show_add_post_form(self, post_id = None):
     logging.debug("final_path = " + final_path)
 
     logged_in = check_login(self)
-    print 89
     data = {
         "logged_in": logged_in,
         "title_kind": "What makes a good post",

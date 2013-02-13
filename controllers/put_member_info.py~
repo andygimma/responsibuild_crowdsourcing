@@ -23,10 +23,6 @@ from controllers.check_login import check_login
 from controllers.show_error_html import show_error_html
 from controllers.put_organization import put_organization
 
-
-
-
-
 def put_member_info(self):
     logging.debug("sign_in_user")
     
@@ -48,7 +44,6 @@ def put_member_info(self):
         twitter = self.request.get("twitter")
         organizations = self.request.get("organizations")
         anything_else = self.request.get("anything_else")
-        address = self.request.get("address")
         city = self.request.get("city")
         state = self.request.get("state")
         country = self.request.get("country")
@@ -70,7 +65,7 @@ def put_member_info(self):
         for item in organizations_list:
             final_item = item.strip()
             final_list.append(final_item)
-            put_organization(final_item)
+            put_organization(self, final_item)
         
         
         if results_exist:

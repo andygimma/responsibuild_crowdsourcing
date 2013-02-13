@@ -3,7 +3,7 @@
 {% for result in post_results %}
 <p>{{ result.title }}</p>
 <p>{{ result.tags }}</p>
-<p>{{ result.entry }}</p>
+<p>{{ result.entry|safe }}</p>
 {% if login_check %}
 <p><a href="/?comment={{result.post_id}}">Comment</a></p>
 {% endif %}

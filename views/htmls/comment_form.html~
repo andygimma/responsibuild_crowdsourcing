@@ -24,4 +24,8 @@
 <br/>
 </fieldset>
 {% endif %}
+{% for result in comment_results %}
+
+
+{% endfor %}
 {% endblock%}

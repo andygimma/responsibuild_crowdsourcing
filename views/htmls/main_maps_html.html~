@@ -26,8 +26,11 @@ var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D7597
 
                 var markers = new L.MarkerClusterGroup();
                 
+<<<<<<< HEAD
                 var lat_lngs_list = [];
                 
+=======
+>>>>>>> updates/1-start-with-invites-check-everything
 /*
                 L.marker([lat, lng]).addTo(map)
                         .bindPopup("<b>{{result.name}}</b><br />").openPopup();*/
@@ -39,9 +42,12 @@ var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D7597
 //                         alert(result_lng);
 //                         var a = addressPoints[i];
                         var title = "{{result.name}}";
+<<<<<<< HEAD
                         var lat_lng = new L.LatLng(result_lat, result_lng);
 //                         alert(lat_lng);
                         lat_lngs_list.push(lat_lng);
+=======
+>>>>>>> updates/1-start-with-invites-check-everything
                         var marker = new L.Marker(new L.LatLng(result_lat, result_lng), { title: title });
                         marker.bindPopup(title);
                         markers.addLayer(marker);
@@ -55,6 +61,7 @@ var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D7597
                 }
                     
                 {% endfor %}
+<<<<<<< HEAD
 //                 alert(lat_lngs_list);
                 try{
                        var thin =  new L.LatLngBounds();
@@ -63,6 +70,9 @@ var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D7597
                 } catch(e) {
                     alert(e.name + e.message);
                 }
+=======
+                map.addLayer(markers);
+>>>>>>> updates/1-start-with-invites-check-everything
                 
 /*
                 L.circle([51.508, -0.11], 500, {

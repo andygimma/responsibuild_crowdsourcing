@@ -29,42 +29,44 @@ import random
 
 def put_comment(self):
     logging.debug("put_post")
-    
-    continue_boolean = False
-    email = ""
-    #try:
-    session = get_current_session()
-    email = session['email']
-    continue_boolean = True
-    #except:
-    #logging.debug("gaesessions exception, do not continue")
-    #continue_boolean = False
-    #show_error_html(self, "session error")
-    comment = self.request.get("comment")
-    post_id = self.request.get("post_id")
-    
-    if not comment:
-        logging.debug("No comment entered")
-        return False, post_id
-    if continue_boolean:
-        ### check db, if not in db put tag
-        new_hash = get_hash()
-        timestamp = get_date_time()
-    
-        c = model.Comment(comment = comment, email = email, comment_id = new_hash, post_id = post_id, timestamp = timestamp)
-        c.put()
-        filters = {
-            "email": email,
-        }
-        results, results_exist = datastore_results("Member", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
-        if results_exist:
-            for result in results:
-                key = result.key()
-                points = result.rep_points
+    if check_login(self):
+        
+        continue_boolean = False
+        email = ""
+        #try:
+        session = get_current_session()
+        email = session['email']
+        continue_boolean = True
+        #except:
+        #logging.debug("gaesessions exception, do not continue")
+        #continue_boolean = False
+        #show_error_html(self, "session error")
+        comment = self.request.get("comment")
+        post_id = self.request.get("post_id")
+        
+        if not comment:
+            logging.debug("No comment entered")
+            return False, post_id
+        if continue_boolean:
+            ### check db, if not in db put tag
+            new_hash = get_hash()
+            timestamp = get_date_time()
+        
+            c = model.Comment(comment = comment, email = email, comment_id = new_hash, post_id = post_id, timestamp = timestamp)
+            c.put()
+            filters = {
+                "email": email,
+            }
+            results, results_exist = datastore_results("Member", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
+            if results_exist:
+                for result in results:
+                    key = result.key()
+                    points = result.rep_points
+                    
+                    member = model.Member.get(key)
+                    member.rep_points = points + 5
+                    member.put()
+            return True, post_id
                 
-                member = model.Member.get(key)
-                member.rep_points = points + 5
-                member.put()
-        return True, post_id
-            
-                
+    else:
+        self.redirect("/")
