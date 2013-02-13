@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/25/trunk/sandy-disaster-recovery/wtforms/fields
+END
+core.py
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/2/trunk/sandy-disaster-recovery/wtforms/fields/core.py
+END
+simple.py
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/2/trunk/sandy-disaster-recovery/wtforms/fields/simple.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/2/trunk/sandy-disaster-recovery/wtforms/fields/__init__.py
+END

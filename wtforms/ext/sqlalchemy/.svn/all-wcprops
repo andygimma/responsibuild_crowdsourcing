@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/25/trunk/sandy-disaster-recovery/wtforms/ext/sqlalchemy
+END
+fields.py
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/2/trunk/sandy-disaster-recovery/wtforms/ext/sqlalchemy/fields.py
+END
+validators.py
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/2/trunk/sandy-disaster-recovery/wtforms/ext/sqlalchemy/validators.py
+END
+orm.py
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/2/trunk/sandy-disaster-recovery/wtforms/ext/sqlalchemy/orm.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/2/trunk/sandy-disaster-recovery/wtforms/ext/sqlalchemy/__init__.py
+END

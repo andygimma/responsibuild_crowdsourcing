@@ -1,0 +1,65 @@
+from google.appengine.ext import webapp
+from google.appengine.ext.webapp import util
+import os
+from google.appengine.ext.webapp import template
+from google.appengine.api import users
+from gaesessions import get_current_session
+import logging
+import model
+import urllib
+from google.appengine.ext import db
+import random
+from google.appengine.ext.webapp import blobstore_handlers
+from google.appengine.ext import blobstore
+from os import environ
+from google.appengine.api import memcache
+from google.appengine.api import images
+from google.appengine.api import oauth
+import Cookie
+import hashlib
+from controllers.check_login import check_login
+from controllers.show_error_html import show_error_html
+from controllers.check_admin import check_admin
+from controllers.get_hash import get_hash
+from controllers.put_invite_hash import put_invite_hash
+
+from google.appengine.api import mail
+from google.appengine.api import users
+
+
+
+def send_invite(self):
+    logging.debug("send_invite")
+    email = self.request.get("email")
+    confirm_email = self.request.get("confirm_email")
+    invite_hash = get_hash()
+    put_invite_hash(email = email, invite_hash = invite_hash)
+    sender = "3Rorg Crowdsourcing Invite <%s>" % "responsibuildorg@gmail.com"
+    logging.debug("sender" + sender)
+    body_first =  """
+    Our Responsibuild hub will showcase best practices ranging from rebuilding your basement with better materials to what kind of mold-resistant paint to buy when you go to your local store.
+    
+    Helping disaster victims recover in an economic and ecologically sustainable way.
+    
+    After the storm, the victims of Hurricane Sandy and other natural disasters inevitably have to rebuild. Your home is where the heart is…why not use this opportunity to create a healthier, more sustainable living space?
+    
+    Responsibuild will allow you to take your life back into your own hands.
+    
+    We leverage the expertise of organizations like The US Green Building Council, The Salvation Army’s Envirenew program, Nyserda, Architecture for Humanity, Make It Right Foundation, and case studies in design, architecture and engineering to help you navigate the crowded space of building materials. Our contributors are collaborating to crowdsource the best answers to the hardest questions. We attempt to be as transparent as possible with our processes and welcome any and all voices.
+    
+    By building and managing this site, we’ll help drive those of you in the recovery and rebuilding stages to the best options for sustainably reconstructing your home and community in the best way both ecologically and economically
+
+    """
+    body = "You've been invited!\nTo accept invite, go to 3rorg-test.appspot.com/?accept_invite=%s" % invite_hash
+    if email == confirm_email:        
+        message = mail.EmailMessage(sender=sender,
+        subject="\nYou've been invited to a new Sustainable Rebuilding project!")
+        
+        message.to = "%s <%s>" % (email, email)
+        message.body = body + body_first
+            
+        message.send()
+        return True
+        
+    else:
+        return False

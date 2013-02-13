@@ -6,7 +6,7 @@
 {% block bodycontent %}
         <div id="map" style="width: 700px; height: 400px"></div>
 
-        <script>
+      <script>
                 var lat = 40.6501038
                 var lng = -73.8495823
 var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png',
@@ -17,31 +17,16 @@ var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D7597
                 var map = new L.Map('map', {center: latlng, zoom: 11, layers: [cloudmade]});
 
                 var markers = new L.MarkerClusterGroup();
-<<<<<<< HEAD
-                
-                var lat_lngs_list = [];
-                
-/*
-                L.marker([lat, lng]).addTo(map)
-                        .bindPopup("<b>{{result.name}}</b><br />").openPopup();*/
-=======
                 var latLngList = [new L.LatLng(lat, lng)];
 
->>>>>>> updates/1-start-with-invites-check-everything
                 {% for result in organization_results %}
                 try{ 
                         var result_lat = {{ result.lat }};
                         var result_lng = {{ result.lng }};
                         var title = "{{result.name}}";
-<<<<<<< HEAD
-                        var lat_lng = new L.LatLng(result_lat, result_lng);
-//                         alert(lat_lng);
-                        lat_lngs_list.push(lat_lng);
-=======
                         var new_latlng = new L.LatLng(result_lat, result_lng);
 //                         alert(new_latlng);
                         latLngList.push(new_latlng);
->>>>>>> updates/1-start-with-invites-check-everything
                         var marker = new L.Marker(new L.LatLng(result_lat, result_lng), { title: title });
                         marker.bindPopup(title);
                         markers.addLayer(marker);
@@ -52,30 +37,6 @@ var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D7597
                 
                     
                 {% endfor %}
-<<<<<<< HEAD
-//                 alert(lat_lngs_list);
-                try{
-                        new L.LatLngBounds(lat_lngs_list);
-//                     alert(thin);
-                    map.addLayer(markers);
-                } catch(e) {
-                    alert(e.name + e.message);
-                }
-                
-/*
-                L.circle([51.508, -0.11], 500, {
-                        color: 'red',
-                        fillColor: '#f03',
-                        fillOpacity: 0.5
-                }).addTo(map).bindPopup("I am a circle.");
-
-                L.polygon([
-                        [51.509, -0.08],
-                        [51.503, -0.06],
-                        [51.51, -0.047]
-                ]).addTo(map).bindPopup("I am a polygon.");
-
-=======
                 var last_bounds = L.LatLngBounds(latLngList);
 //                 alert(last_bounds);
                 var last_list;
@@ -84,7 +45,6 @@ var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D7597
 //                     alert(latLngList[j]);
                     
                 }
->>>>>>> updates/1-start-with-invites-check-everything
 
 
 //                 latLngList.pop();
@@ -120,5 +80,4 @@ var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D7597
 
 
         </script>
-
 {% endblock %}
