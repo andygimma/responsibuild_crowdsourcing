@@ -5,7 +5,7 @@
 <p>Email: {{ result.email }}</p>
 <p>Twitter: {{ result.twitter }}</p>
 <p>Organizations: {{ result.orgs }}</p>
-<p>About me: {{ result.anything_else }}</p>
+<p>{{ result.anything_else }}</p>
 
   <nav class="navigation">
     <a href="/?edit_member=True">Edit</a>
@@ -15,13 +15,14 @@
 
 {% block bodycontent %}
 <h3>Organizations</h3>
-<h4>Can you fill out some more information about your organizations? It would really help make this site more useful for everyone involved.</h4>
+{% if unfinished_organizations_list %}
+<h2>Can you fill out some more information about your organizations?</h2><h3>It would really help make this site more useful for everyone involved.</h3>
 {% for org in unfinished_organizations_list %}
-<p><a href="/?add_info={{ org }}">{{ org }}</a></p>
+<h4><a href="/?add_info={{ org }}">{{ org }}</a></h4>
 {% endfor %}
+{% endif %}
 
 {% if finished_organizations_list %}
-<h4>Finished Organizations</h4>
 {% endif %}
 {% for org in finished_organizations_list %}
 <p><a href="/?organization={{ org }}">{{ org }}</a></p>

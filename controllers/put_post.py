@@ -74,6 +74,7 @@ def put_post(self):
                 p.title = title
                 p.tags = tags
                 p.entry = entry
+                p.tags_list = final_list
                 p.timestamp = timestamp
                 p.put()
                 return old_hash

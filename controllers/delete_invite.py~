@@ -23,6 +23,7 @@ from controllers.datastore_results import datastore_results
 
 
 def delete_invite(invite_hash, invite_email):
+    print invite_email, invite_hash
     logging.debug("check_post_duplicates")
     session = get_current_session()
     email = session['email']
@@ -30,10 +31,8 @@ def delete_invite(invite_hash, invite_email):
         "invite_hash": invite_hash,
         "email": invite_email,
     }
-    print invite_email, invite_hash
     results, results_exist = datastore_results("Invites", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
     if not results_exist:
-        print 3
         return False
     
     for result in results:

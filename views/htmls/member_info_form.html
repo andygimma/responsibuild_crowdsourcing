@@ -24,13 +24,13 @@
 
 <div>
 <label for="first_name" class="label">First Name </label>
-<input type="text" class="input" name="first_name" />
+<input {% if old_first_name %} value="{{ old_first_name }}" {% endif %} type="text" class="input" name="first_name" />
 </div>
 <br/>
 
 <div>
 <label for="last_name" class="label">Last Name</label>
-<input type="text" class="input" name="last_name" />
+<input {% if old_last_name %} value="{{ old_last_name }}" {% endif %} type="text" class="input" name="last_name" />
 </div>
 <br/>
 
@@ -38,7 +38,7 @@
 
 <div>
 <label for="twitter" class="label">Twitter</label>
-<input type="text" class="input" name="twitter" />
+<input {% if old_twitter %} value="{{ old_twitter }}" {% endif %} type="text" class="input" name="twitter" />
 </div>
 <br/>
 
@@ -46,17 +46,17 @@
 
 <div>
 <label for="city" class="label">City</label>
-<input type="text" class="input" name="city" />
+<input {% if old_city %} value="{{ old_city }}" {% endif %} type="text" class="input" name="city" />
 </div>
 <br/>
 <div>
 <label for="state" class="label">State (if applicable)</label>
-<input type="text" class="input" name="state" />
+<input {% if old_state %} value="{{ old_state }}" {% endif %} type="text" class="input" name="state" />
 </div>
 <br/>
 <div>
 <label for="Country" class="label">Country</label>
-<input type="text" class="input" name="country" />
+<input {% if old_country %} value="{{ old_country }}" {% endif %} type="text" class="input" name="country" />
 </div>
 <br/>
 
@@ -67,13 +67,13 @@
 
 <div>
 <label for="organizations" class="label">Organizations (separate with a comma)</label>
-<input type="text" class="input" name="organizations" />
+<input {% if old_orgs %} value="{{old_orgs}}" {% endif %} type="text" class="input" name="organizations" />
 </div>
 <br/>
 
 <div>
 <label for="anything_else" class="label">Is there anything else you would like us to know about yourself?</label>
-<input type="text" class="input" name="anything_else" />
+<input {% if old_anything_else %} value="{{ old_anything_else }}" {% endif %} type="text" class="input" name="anything_else" />
 </div>
 <br/>
 

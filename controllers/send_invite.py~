@@ -36,27 +36,38 @@ def send_invite(self):
     put_invite_hash(email = email, invite_hash = invite_hash)
     sender = "3Rorg Crowdsourcing Invite <%s>" % "responsibuildorg@gmail.com"
     logging.debug("sender" + sender)
-    body_first =  """
-    Our Responsibuild hub will showcase best practices ranging from rebuilding your basement with better materials to what kind of mold-resistant paint to buy when you go to your local store.
     
-    Helping disaster victims recover in an economic and ecologically sustainable way.
+    body_first = "Hello " + email
+    body_edited = """    
     
-    After the storm, the victims of Hurricane Sandy and other natural disasters inevitably have to rebuild. Your home is where the heart is…why not use this opportunity to create a healthier, more sustainable living space?
     
-    Responsibuild will allow you to take your life back into your own hands.
+    You're receiving this invite from the team behind Responsibuild, a hackathon award-winning project focused on creating a hub for survivors of disasters to rebuild their homes, communities, and lives.
     
-    We leverage the expertise of organizations like The US Green Building Council, The Salvation Army’s Envirenew program, Nyserda, Architecture for Humanity, Make It Right Foundation, and case studies in design, architecture and engineering to help you navigate the crowded space of building materials. Our contributors are collaborating to crowdsource the best answers to the hardest questions. We attempt to be as transparent as possible with our processes and welcome any and all voices.
     
-    By building and managing this site, we’ll help drive those of you in the recovery and rebuilding stages to the best options for sustainably reconstructing your home and community in the best way both ecologically and economically
-
+    
+    We're building a site of best practices and best materials for rebuilding in the wake of a natural disaster, such as a hurricane, flood, tornado, etc.  Our project was created in response to Hurricane Sandy and the wide scoping impact it had on the New York City community.
+    
+    
+    
+    Thank you for joining and for contributing your expert take and advice on issues such as mold remediation, most sustainable building materials (that are also economically affordable), and on how to best rebuild a home or community to weather future inevitable disasters and storms.
+    
+    
+    
+    With gratitude,
+    
+    
+    
+    Responsibuild (Andy, Ana, and Erica)
+    
     """
-    body = "You've been invited!\nTo accept invite, go to 3rorg-test.appspot.com/?accept_invite=%s" % invite_hash
+    body_last = "To accept invite, go to 3rorg-test.appspot.com/?accept_invite=%s" % invite_hash
+    finished_body = body_first + body_edited + body_last
     if email == confirm_email:        
         message = mail.EmailMessage(sender=sender,
         subject="\nYou've been invited to a new Sustainable Rebuilding project!")
         
         message.to = "%s <%s>" % (email, email)
-        message.body = body + body_first
+        message.body = finished_body
             
         message.send()
         return True

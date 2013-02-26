@@ -66,6 +66,7 @@ from controllers.put_feedback import put_feedback
 from controllers.delete_post import delete_post
 from controllers.delete_comment import delete_comment
 from controllers.update_org import update_org
+from controllers.show_edit_member import show_edit_member
 
 from controllers.test_control import test_control
 
@@ -117,6 +118,7 @@ class MainHandler(webapp.RequestHandler):
         edit_param = self.request.get("edit")
         delete_post_param = self.request.get("delete_post")
         delete_comment_param = self.request.get("delete_comment")
+        edit_member_param = self.request.get("edit_member")
         #update_org_param = self.request.get("update_org")
         
         
@@ -197,6 +199,9 @@ class MainHandler(webapp.RequestHandler):
         elif delete_comment_param:
             delete_comment(delete_comment_param)
             self.redirect("/")
+            
+        elif edit_member_param:
+            show_edit_member(self)
             
         #elif update_org_param:
             #update_org(self)

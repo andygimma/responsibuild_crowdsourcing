@@ -26,7 +26,6 @@ from controllers.delete_tag import delete_tag
 
 def show_single_tag_html(self, tag):
     logging.debug("show_single_tag_html")
-    #try:
     path = os.path.join(os.path.dirname(__file__))
     path_length = path.__len__()
     final_path = path[0:path_length-11] + 'views/htmls/show_single_tag.html'

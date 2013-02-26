@@ -11,7 +11,7 @@
 <!-- <script src="static/jquery/marker_clusterer.js"></script> -->
   <script type="text/javascript" src="/jquery/marker_clusterer.js"></script>    
   <link rel="stylesheet" type="text/css" href="/stylesheets/MarkerCluster.css" />
-<link rel="stylesheet" type="text/css" href="/stylesheets/MarkerCluser.Default.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/MarkerCluster.Default.css" />
 
 
 

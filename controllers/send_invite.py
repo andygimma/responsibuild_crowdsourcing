@@ -36,17 +36,38 @@ def send_invite(self):
     put_invite_hash(email = email, invite_hash = invite_hash)
     sender = "3Rorg Crowdsourcing Invite <%s>" % "responsibuildorg@gmail.com"
     logging.debug("sender" + sender)
-    body_first =  """
-    You've been invited!
-    Our Responsibuild hub will showcase best practices ranging from rebuilding your basement with better materials to what kind of mold-resistant paint to buy when you go to your local store.    We are a project
+    
+    body_first = "Hello " + email
+    body_edited = """    
+    
+    
+    You're receiving this invite from the team behind Responsibuild, a hackathon award-winning project focused on creating a hub for survivors of disasters to rebuild their homes, communities, and lives.
+    
+    
+    
+    We're building a site of best practices and best materials for rebuilding in the wake of a natural disaster, such as a hurricane, flood, tornado, etc.  Our project was created in response to Hurricane Sandy and the wide scoping impact it had on the New York City community.
+    
+    
+    
+    Thank you for joining and for contributing your expert take and advice on issues such as mold remediation, most sustainable building materials (that are also economically affordable), and on how to best rebuild a home or community to weather future inevitable disasters and storms.
+    
+    
+    
+    With gratitude,
+    
+    
+    
+    Responsibuild (Andy, Ana, and Erica)
+    
     """
-    body = "To accept invite, go to 3rorg-test.appspot.com/?accept_invite=%s" % invite_hash
+    body_last = "To accept invite, go to 3rorg-test.appspot.com/?accept_invite=%s" % invite_hash
+    finished_body = body_first + body_edited + body_last
     if email == confirm_email:        
         message = mail.EmailMessage(sender=sender,
-        subject="\nYou've been invited to a new Sustainable Rebuilding project!")
+        subject="\n!")
         
         message.to = "%s <%s>" % (email, email)
-        message.body = body_first + body
+        message.body = finished_body
             
         message.send()
         return True

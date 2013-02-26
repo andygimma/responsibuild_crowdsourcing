@@ -85,6 +85,9 @@ def put_member_info(self):
                         m.orgs_list = final_list
                         m.anything_else = anything_else
                         m.location = location
+                        m.city = city
+                        m.state = state
+                        m.country = country
                         m.put()  
                     
                         return True

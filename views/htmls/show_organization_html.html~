@@ -16,7 +16,7 @@
         <script>
                 var lat = {{result.lat}}
                 var lng = {{result.lng}}
-                 alert(lat + " " + lng);
+//                  alert(lat + " " + lng);
                 
                 var map = L.map('map').setView([lat, lng], 13);
 

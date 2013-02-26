@@ -26,7 +26,7 @@ var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D7597
                 try{ 
                         var result_lat = {{ result.lat }};
                         var result_lng = {{ result.lng }};
-                        var title = "{{result.name}}";
+                        var title = "<a href='?organization={{ result.name }}'>{{result.name}}</a><br/>{{result.address}}";
                         var new_latlng = new L.LatLng(result_lat, result_lng);
 //                         alert(new_latlng);
                         latLngList.push(new_latlng);

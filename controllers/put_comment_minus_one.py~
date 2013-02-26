@@ -30,76 +30,79 @@ import random
 
 def put_comment_minus_one(self):
     logging.debug("put_comment_minus_one")
-    continue_boolean = False
-    email = ""
-    #try:
-    session = get_current_session()
-    email = session['email']
-    continue_boolean = True
-    #except:
-        #logging.debug("gaesessions exception, do not continue")
-        #continue_boolean = False
-        #show_error_html(self, "session error")
-        
-        
-    if continue_boolean:
-        post_id = self.request.get("post_id")
-        comment_id = self.request.get("comment_id")
-        comment_email = ""
-        
-        if comment_minus_one_constraints(self, comment_id):
-                
-
-            filters = {
-                "comment_id": comment_id,
-            }
-            results, results_exist = datastore_results("Comment", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
-            key = None
-            points = 0
-            for result in results:
-                key = result.key()
-                points = result.points
-                comment_email = result.email
+    if check_login(self):
+        continue_boolean = False
+        email = ""
+        #try:
+        session = get_current_session()
+        email = session['email']
+        continue_boolean = True
+        #except:
+            #logging.debug("gaesessions exception, do not continue")
+            #continue_boolean = False
+            #show_error_html(self, "session error")
             
-            if key is not None:
-                p = model.Comment.get(key)
-                if points is None:
-                    points = 0
-                p.points = points - 1
-                p.put()
-                
+            
+        if continue_boolean:
+            post_id = self.request.get("post_id")
+            comment_id = self.request.get("comment_id")
+            comment_email = ""
+            
+            if comment_minus_one_constraints(self, comment_id):
+                    
+
                 filters = {
                     "comment_id": comment_id,
-                    "email": email,
                 }
-                
-                results, results_exist = datastore_results("CommentPlusMinusConstraints", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
+                results, results_exist = datastore_results("Comment", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
+                key = None
                 points = 0
+                for result in results:
+                    key = result.key()
+                    points = result.points
+                    comment_email = result.email
                 
-                if results_exist:
-                    for result in results:
-                        points = result.points
-                        key = result.key()
-                        pm = model.CommentPlusMinusConstraints.get(key)
-                        pm.points = points - 1
-                        pm.put()
-
-                
-                else:
-                    pm = model.CommentPlusMinusConstraints(email = email, post_id = post_id, points = points - 1)
-                    pm.put()
-                        
+                if key is not None:
+                    p = model.Comment.get(key)
+                    if points is None:
+                        points = 0
+                    p.points = points - 1
+                    p.put()
+                    
                     filters = {
-                        "email": comment_email,
+                        "comment_id": comment_id,
+                        "email": email,
                     }
-                    results, results_exist = datastore_results("Member", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
+                    
+                    results, results_exist = datastore_results("CommentPlusMinusConstraints", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
+                    points = 0
+                    
                     if results_exist:
                         for result in results:
+                            points = result.points
                             key = result.key()
-                            points = result.rep_points
-                  
-                            member = model.Member.get(key)
-                            member.rep_points = points - 2
-                            member.put()
-                
-        return post_id
+                            pm = model.CommentPlusMinusConstraints.get(key)
+                            pm.points = points - 1
+                            pm.put()
+
+                    
+                    else:
+                        pm = model.CommentPlusMinusConstraints(email = email, post_id = post_id, points = points - 1)
+                        pm.put()
+                            
+                        filters = {
+                            "email": comment_email,
+                        }
+                        results, results_exist = datastore_results("Member", filters = filters, inequality_filters = None, order = None, fetch_total = 1, offset = 0, mem_key = None)
+                        if results_exist:
+                            for result in results:
+                                key = result.key()
+                                points = result.rep_points
+                    
+                                member = model.Member.get(key)
+                                member.rep_points = points - 2
+                                member.put()
+                    
+            return post_id
+    else:
+        self.redirect("/")

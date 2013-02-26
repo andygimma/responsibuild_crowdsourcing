@@ -27,7 +27,7 @@
 
 
                 L.marker([lat, lng]).addTo(map)
-                        .bindPopup("<b>{{result.name}}</b><br />").openPopup();
+                        .bindPopup("<b>{{result.name}}</b><br />{{result.address}}").openPopup();
 /*
                 L.circle([51.508, -0.11], 500, {
                         color: 'red',

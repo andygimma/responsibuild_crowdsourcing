@@ -75,5 +75,5 @@
 
 <p>Date: {{ result.timestamp|prettify }}</p>
 {% endfor %}
-<p>Subjects: {% for result in post_results %}{% for tag in result.tags_list %}<a href="/?singletag={{tag}}">{{tag}}</a> {% endfor %}{%endfor%}
+<p>Subjects: {% for result in post_results %}{% for tag in result.tags_list %}<a href="/?singletag={{tag}}">"{{tag}}"</a> {% endfor %}{%endfor%}
 {% endblock %}

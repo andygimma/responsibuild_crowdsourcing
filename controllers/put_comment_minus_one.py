@@ -87,7 +87,7 @@ def put_comment_minus_one(self):
 
                     
                     else:
-                        pm = model.CommentPlusMinusConstraints(email = email, post_id = post_id, points = points - 1)
+                        pm = model.CommentPlusMinusConstraints(comment_id = comment_id, email = email, post_id = post_id, points = points - 1)
                         pm.put()
                             
                         filters = {
