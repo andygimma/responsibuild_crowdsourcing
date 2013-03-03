@@ -33,11 +33,11 @@ footer, header, hgroup, menu, nav, section {
     display: block;
 }
 body {
-    line-height: 1;
+    line-height: 1.5em;
 }
-ol, ul {
+/*ol, ul {
     list-style: none;
-}
+}*/
 blockquote, q {
     quotes: none;
 }
@@ -56,7 +56,7 @@ table {
 header, hgroup, nav, article, section, footer, aside, address{ display:block;}
 time{  font-style:italic; padding:0px 5px;}
 address{ font-size:11px; padding:10px 10px; text-align:right }
-body{ font-family: Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+body{ font-family: Georgia, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
         font-weight: 400;
         font-size: 100%;
         color: #333;
@@ -66,12 +66,12 @@ body{ font-family: Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, se
         overflow-x: hidden;
         background: #fff}
 h1.maintitle{
-        background:url(/images/3r_logo.png) no-repeat;
+        background:url(/images/logo4.png) no-repeat;
         height:54px;
         width:261px;
         font-size: 2em;
         line-height: 40px;
-        margin: 1em 0 0 0;
+        margin: 0.5em 0 0 0;
         padding: 0;
         position: relative;
         font-weight: 300;
@@ -107,12 +107,20 @@ h3{
 p{
     font-size:1em;
     line-height:1.5em;
+    margin-bottom:1em;
 }
 
 
-.sidebar h1{ font-size:1.5em; padding:0px; border-bottom:2px solid #dedede;}
+.sidebar h1{ font-size:1.5em; line-height:1.5em; margin-top:2em; padding:0px; border-bottom:2px solid #dedede;}
 
+li{
+    margin-bottom:1em;
+}
 
+article li{
+    margin-bottom:1em;
+    list-style-type:disc;
+}
 
 a{
         color: #6190ca;
@@ -120,6 +128,12 @@ a{
 }
 a:hover { color:#406189;
 text-decoration:none;}
+
+article h2{
+    font-size: 1.5em;
+    line-height:1.5em;
+    margin: 2em 0 0.5em 0;
+}
 
 /*
 Main Styles
@@ -150,7 +164,6 @@ Main Styles
         padding: 0px 6px;
         color: #aaa;
         line-height: 30px;      
-        font-size: 15px;
         text-shadow: 1px 1px 1px #fff;
         border: 1px solid #fff;
         background: #ffffff; /* Old browsers */
@@ -199,6 +212,7 @@ h1, h2, h3{
         text-shadow: 1px 1px 1px rgba(255,255,255,0.7);
         line-height: 140%;
         padding:5px 0px;
+        text-indent: -9999px;
 }
 
 #title h2 small {
@@ -239,20 +253,18 @@ h1, h2, h3{
         float: right;
         width:35%;
         padding:0 10px 10px 50px;
-        border-right:1px solid #ccc;
-        
-        
+        border:none;
 }
 
 article{
-    width:66%;
+    width:60%;
 }
 
 
-#logo{ background:url(/images/logo.png) no-repeat; height:80px; width:289px;}
+#logo{ background:url(/images/logo4.png) no-repeat; height:80px; width:289px;}
 
 .sidebar {
-        padding: 10px;
+        padding: 0 10px;
         width:90%;
         min-height: 200px;
 }
@@ -341,7 +353,7 @@ background:url(/images/resize.png) repeat scroll 0% 0% transparent;
         width:30%;clear:both;
         padding:10px;
         }
-        #logo{ background:url(/images/logo2.png) no-repeat; height:55px; width:200px; margin-left:auto; margin-right:auto;}
+        #logo{ background:url(/images/logo4.png) no-repeat; height:55px; width:200px; margin-left:auto; margin-right:auto;}
 }
 
 @media screen and (min-width: 421px) and (max-width: 640px) {
@@ -349,7 +361,7 @@ background:url(/images/resize.png) repeat scroll 0% 0% transparent;
         header{ text-align:center;}
         #navigation{ height:190px;}
         #navigation ul li{ float:none; text-align:center; border-bottom:1px solid #dedede; }
-        /*.navigation a{ float:none; font-size:16px; padding:0px 0px; width:100%; text-align:center; text-transform:uppercase;}*/
+        .navigation a{ float:none; padding:0px 0px; width:100%; text-align:center; text-transform:uppercase;}
         #contents{
         width: 95%;
         font-size:14px;position:relative;
@@ -364,15 +376,15 @@ background:url(/images/resize.png) repeat scroll 0% 0% transparent;
         width:95%;clear:both; 
         padding:10px;
         }
-        #logo{ background:url(/images/logo2.png) no-repeat; height:55px; width:200px; margin-left:auto; margin-right:auto;}
+        #logo{ background:url(/images/logo4.png) no-repeat; height:55px; width:200px; margin-left:auto; margin-right:auto;}
 }
 
 @media screen and (min-width: 320px) and (max-width: 420px) {
         #Wrapper{ width: 320px; margin:0px auto;}
         header{ text-align:center;}
         #navigation{ height:190px;}
-        #navigation ul li{ float:none; text-align:center; }
-        .navigation a{  border-bottom:1px dotted #dedede; float:none; font-size:13px; padding:0px 0px; width:100%; text-align:center; text-transform:uppercase;}
+        #navigation ul li{ float:none; text-align:center; border-bottom:1px solid #dedede;}
+        .navigation a{  border-bottom:1px dotted #dedede; float:none; padding:0px 0px; width:100%; text-align:center; text-transform:uppercase;}
         #contents{
         width: 95%;
         font-size:14px;position:relative;
@@ -387,13 +399,13 @@ background:url(/images/resize.png) repeat scroll 0% 0% transparent;
         width:95%;clear:both;
         padding:10px; 
         }
-        #logo{ background:url(/images/logo3.png) no-repeat; height:41px; width:150px; margin-left:auto; margin-right:auto;}
+        #logo{ background:url(/images/logo4.png) no-repeat; height:41px; width:150px; margin-left:auto; margin-right:auto;}
 }
 @media screen and (min-width: 0px) and (max-width: 319px) {
         #Wrapper{ width: 100%; margin:0px auto;}
         header{ text-align:center;}
         #navigation{ height:190px;}
-        .navigation a{ float:none; font-size:13px; padding:0px 0px; width:100%; text-align:center; text-transform:uppercase;}
+        .navigation a{ border-bottom:1px dotted #dedede; float:none; padding:0px 0px; width:100%; text-align:center; text-transform:uppercase;}
         #contents{
         width: 95%;
         font-size:14px;position:relative;
@@ -404,11 +416,11 @@ background:url(/images/resize.png) repeat scroll 0% 0% transparent;
         #contents h1{ font-size:16px; text-align:left; font-weight:bold; line-height:normal; }
         #comments h1,.sidebar h1{ font-size:14px; text-align:left; line-height:normal;}
         #sidebar-wrapper {
-        float: none; font-size:13px;
+        float: none;
         width:95%;clear:both; 
         padding:10px; 
         }
-        #logo{ background:url(../images/logo3.png) no-repeat; height:41px; width:150px; margin-left:auto; margin-right:auto;}
+        #logo{ background:url(../images/logo4.png) no-repeat; height:41px; width:150px; margin-left:auto; margin-right:auto;}
 }
 
 textarea
@@ -427,6 +439,6 @@ pre
     white-space: -pre-wrap;      /* Opera 4-6 */
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;      
-    font-family: Cambria, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif
+    font-family: Cambria, Georgia, "Palatino Linotype", "Palatino LT STD", Georgia, serif
 }
 
