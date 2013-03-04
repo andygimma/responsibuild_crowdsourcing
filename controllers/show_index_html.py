@@ -20,6 +20,8 @@ import hashlib
 from controllers.check_login import check_login
 from controllers.show_error_html import show_error_html
 from controllers.datastore_results import datastore_results
+from controllers.get_hash import get_hash
+from models import model
 
 
 
@@ -75,8 +77,15 @@ def show_index_html(self):
         }
         
         
+        member_filters = {
+            "first_name": "Admin"
+        }
+        results, results_exist = datastore_results("Member", filters = member_filters, inequality_filters = None, order = None, fetch_total = 1000, offset = 0, mem_key = None)
         
-        
+        if not results_exist:
+            password = get_hash("sandytech")
+            m = model.Member(first_name = "Admin", password = password, category="Volunteer", orgs_list = [""], email = "responsibuildorg@gmail.com")
+            m.put()
         
         self.response.out.write(template.render(final_path, data))         
         #except:
