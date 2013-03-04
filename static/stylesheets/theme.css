@@ -108,18 +108,19 @@ p{
     font-size:1em;
     line-height:1.5em;
     margin-bottom:1em;
+    color:#555;
 }
 
 
-.sidebar h1{ font-size:1.5em; line-height:1.5em; margin-top:2em; padding:0px; border-bottom:2px solid #dedede;}
+.sidebar h1{ font-size:1.5em; line-height:1.5em; margin-top:2em; padding:0px; border-bottom:2px solid #bcbd44;}
 
 li{
     margin-bottom:1em;
 }
 
-article li{
+.left_col ul{
     margin-bottom:1em;
-    list-style-type:disc;
+    list-style-type:square;
 }
 
 a{
@@ -129,7 +130,7 @@ a{
 a:hover { color:#406189;
 text-decoration:none;}
 
-article h2{
+.left_col h2{
     font-size: 1.5em;
     line-height:1.5em;
     margin: 2em 0 0.5em 0;
@@ -165,6 +166,7 @@ Main Styles
         color: #aaa;
         line-height: 30px;      
         text-shadow: 1px 1px 1px #fff;
+        font-size:1em;
         border: 1px solid #fff;
         background: #ffffff; /* Old browsers */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
@@ -256,7 +258,7 @@ h1, h2, h3{
         border:none;
 }
 
-article{
+.left_col{
     width:60%;
 }
 
@@ -286,6 +288,17 @@ height:80px;
 width:80px;
 background:url(/images/resize.png) repeat scroll 0% 0% transparent;
 }
+
+
+/*--------------MAP---------------------*/
+.leaflet-container{
+overflow: hidden;
+outline: 0;
+width: 90%;
+height: 400px;
+}
+
+/*--------------MEDIA QUERIES---------------------*/
 
 @media all {
         #Wrapper,#logo,#navigation ul li a {
@@ -335,16 +348,13 @@ background:url(/images/resize.png) repeat scroll 0% 0% transparent;
 
 @media screen and (min-width: 641px) and (max-width: 760px) {   
         /*#Wrapper{ width: 620px; margin:0px auto;}*/
-        header{ text-align:center;}
+        header{ text-align:left;}
         #navigation{ height:190px;}
         #navigation ul li{ float:none; text-align:center; border-bottom:1px solid #dedede; }
         #navigation ul li a{ font-size:11px; padding:0px 0px; width:100%;}
         #contents{
         width: 55%;
         font-size:16px;
-        }
-        article{
-            width:100%;
         }
         #contents h1{ font-size:25px; text-align:left; line-height:30px;}
         #comments h1,.sidebar h1{text-align:left}
@@ -354,11 +364,17 @@ background:url(/images/resize.png) repeat scroll 0% 0% transparent;
         padding:10px;
         }
         #logo{ background:url(/images/logo4.png) no-repeat; height:55px; width:200px; margin-left:auto; margin-right:auto;}
+        .leaflet-container{
+        overflow: hidden;
+        outline: 0;
+        width: 90%;
+        height: 400px;
+        }
 }
 
 @media screen and (min-width: 421px) and (max-width: 640px) {
         #Wrapper{ width: 420px; margin:0px auto;}
-        header{ text-align:center;}
+/*        header{ text-align:center;}*/
         #navigation{ height:190px;}
         #navigation ul li{ float:none; text-align:center; border-bottom:1px solid #dedede; }
         .navigation a{ float:none; padding:0px 0px; width:100%; text-align:center; text-transform:uppercase;}
@@ -366,7 +382,7 @@ background:url(/images/resize.png) repeat scroll 0% 0% transparent;
         width: 95%;
         font-size:14px;position:relative;
         }
-        article{
+        .left_col{
             width:100%;
         }
         #contents h1{ font-size:22px; text-align:left; font-weight:bold; line-height:normal;}
@@ -377,11 +393,17 @@ background:url(/images/resize.png) repeat scroll 0% 0% transparent;
         padding:10px;
         }
         #logo{ background:url(/images/logo4.png) no-repeat; height:55px; width:200px; margin-left:auto; margin-right:auto;}
+        .leaflet-container{
+        overflow: hidden;
+        outline: 0;
+        width: 90%;
+        height: 400px;
+        }
 }
 
 @media screen and (min-width: 320px) and (max-width: 420px) {
         #Wrapper{ width: 320px; margin:0px auto;}
-        header{ text-align:center;}
+/*        header{ text-align:center;}*/
         #navigation{ height:190px;}
         #navigation ul li{ float:none; text-align:center; border-bottom:1px solid #dedede;}
         .navigation a{  border-bottom:1px dotted #dedede; float:none; padding:0px 0px; width:100%; text-align:center; text-transform:uppercase;}
@@ -389,7 +411,7 @@ background:url(/images/resize.png) repeat scroll 0% 0% transparent;
         width: 95%;
         font-size:14px;position:relative;
         }
-        article{
+        .left_col{
             width:100%;
         }
         #contents h1{ font-size:18px; text-align:left; font-weight:bold; line-height:normal;}
@@ -400,17 +422,23 @@ background:url(/images/resize.png) repeat scroll 0% 0% transparent;
         padding:10px; 
         }
         #logo{ background:url(/images/logo4.png) no-repeat; height:41px; width:150px; margin-left:auto; margin-right:auto;}
+        .leaflet-container{
+        overflow: hidden;
+        outline: 0;
+        width: 90%;
+        height: 400px;
+        }
 }
 @media screen and (min-width: 0px) and (max-width: 319px) {
         #Wrapper{ width: 100%; margin:0px auto;}
-        header{ text-align:center;}
+/*        header{ text-align:center;}*/
         #navigation{ height:190px;}
         .navigation a{ border-bottom:1px dotted #dedede; float:none; padding:0px 0px; width:100%; text-align:center; text-transform:uppercase;}
         #contents{
         width: 95%;
         font-size:14px;position:relative;
         }
-        article{
+        .left_col{
             width:100%;
         }
         #contents h1{ font-size:16px; text-align:left; font-weight:bold; line-height:normal; }
@@ -421,6 +449,12 @@ background:url(/images/resize.png) repeat scroll 0% 0% transparent;
         padding:10px; 
         }
         #logo{ background:url(../images/logo4.png) no-repeat; height:41px; width:150px; margin-left:auto; margin-right:auto;}
+        .leaflet-container{
+        overflow: hidden;
+        outline: 0;
+        width: 90%;
+        height: 400px;
+        }
 }
 
 textarea
@@ -441,4 +475,6 @@ pre
     word-wrap: break-word;      
     font-family: Cambria, Georgia, "Palatino Linotype", "Palatino LT STD", Georgia, serif
 }
+
+
 
