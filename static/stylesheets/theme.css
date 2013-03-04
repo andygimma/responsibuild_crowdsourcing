@@ -288,7 +288,9 @@ height:80px;
 width:80px;
 background:url(/images/resize.png) repeat scroll 0% 0% transparent;
 }
-
+footer{
+        font-family: 'Fjalla One', sans-serif;
+}
 
 /*--------------MAP---------------------*/
 .leaflet-container{
